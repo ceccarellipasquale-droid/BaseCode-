@@ -1,0 +1,898 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BaseCode | Web Engineering Excellence</title>
+<meta name="description" content="BaseCode: agencia de desarrollo y diseño web en Perú. Construcción, rediseño y optimización de sitios web profesionales, desde S/ 1,500."/>
+<meta property="og:title" content="BaseCode | Agencia de Desarrollo Web"/>
+<meta property="og:description" content="Construcción, rediseño y optimización de sitios web profesionales para hacer crecer tu negocio."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="es_PE"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0e0f'/%3E%3Ctext x='32' y='45' font-family='Arial, sans-serif' font-weight='700' font-size='34' fill='%2363f7ff' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Geist:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003fa4",
+                        "surface-container-high": "#2a2a2b",
+                        "on-primary-fixed": "#001849",
+                        "surface-container-lowest": "#0e0e0f",
+                        "secondary": "#63f7ff",
+                        "surface-container-highest": "#353436",
+                        "surface-tint": "#b3c5ff",
+                        "surface-variant": "#353436",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-container": "#f8f7ff",
+                        "on-tertiary-fixed": "#1c1b1c",
+                        "inverse-surface": "#e5e2e3",
+                        "surface-dim": "#131314",
+                        "secondary-fixed": "#63f7ff",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e5e2e3",
+                        "tertiary-fixed": "#e6e1e2",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#00dce5",
+                        "on-surface-variant": "#c2c6d8",
+                        "on-tertiary-container": "#fcf7f8",
+                        "inverse-primary": "#0054d6",
+                        "on-primary": "#002b75",
+                        "outline": "#8c90a1",
+                        "on-error": "#690005",
+                        "background": "#0e0e0f",
+                        "surface-container-low": "#1c1b1c",
+                        "primary": "#0266ff",
+                        "on-tertiary-fixed-variant": "#484647",
+                        "on-tertiary": "#313031",
+                        "on-background": "#e5e2e3",
+                        "error-container": "#93000a",
+                        "tertiary": "#c9c5c6",
+                        "on-secondary-fixed": "#002021",
+                        "surface-container": "#201f20",
+                        "outline-variant": "#424656",
+                        "on-secondary": "#003739",
+                        "inverse-on-surface": "#313031",
+                        "on-secondary-container": "#005c60",
+                        "on-secondary-fixed-variant": "#004f53",
+                        "secondary-container": "#00dce5",
+                        "tertiary-fixed-dim": "#c9c5c6",
+                        "surface": "#131314",
+                        "tertiary-container": "#747172",
+                        "surface-bright": "#39393a",
+                        "primary-container": "#0266ff",
+                        "primary-fixed-dim": "#b3c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit-sm": "8px",
+                        "margin-mobile": "20px",
+                        "unit-xs": "4px",
+                        "section-gap-desktop": "140px",
+                        "unit-lg": "24px",
+                        "section-gap-mobile": "80px",
+                        "margin-desktop": "64px",
+                        "unit-md": "16px",
+                        "grid-columns": "12"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Geist"],
+                        "label-xs": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-xs": ["10px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(28, 27, 28, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: #00dce5;
+            transition: border-color 0.3s ease;
+        }
+        .technical-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 220, 229, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .active-nav-border {
+            border-bottom: 2px solid #63f7ff;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #353436;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Section 1: Header -->
+<header class="docked full-width top-0 sticky z-50 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop h-20 flex justify-between items-center transition-transform">
+<div class="flex items-center gap-unit-sm">
+<img alt="BaseCode" class="h-14 w-auto" src="assets/logo-basecode.jpg"/>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#servicios">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#proceso">Proceso</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#precios">Planes</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#nosotros">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#contacto">Contacto</a>
+</nav>
+<a class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm hover:scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(2,102,255,0.3)] cursor-pointer" href="#precios">
+            Empezar Proyecto
+        </a>
+</header>
+<!-- Section 2: Hero -->
+<section class="relative pt-section-gap-desktop pb-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="technical-glow -top-20 -left-20"></div>
+<div class="technical-glow bottom-0 right-0" style="background: radial-gradient(circle, rgba(2, 102, 255, 0.05) 0%, transparent 70%);"></div>
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-gutter items-center relative z-10">
+<div class="flex flex-col gap-unit-md">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] px-3 py-1 border border-secondary/30 w-fit rounded-full bg-secondary/5">
+                    WEB ENGINEERING EXCELLENCE
+                </span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">
+                    Construimos el futuro de tu <span class="text-secondary">presencia digital</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Agencia técnica especializada en startups. Transformamos ideas complejas en infraestructuras web de alto rendimiento, escalables y visualmente impactantes.
+                </p>
+<div class="flex flex-wrap gap-unit-md mt-unit-lg">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-sm text-label-sm flex items-center gap-2 group cursor-pointer" href="#precios">
+                        Iniciar Proyecto
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-secondary/10 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<img alt="Dashboard de rendimiento web mostrado en un monitor, en un espacio de trabajo tecnológico" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT4VkA5QJaniiNUt_4bQXK7Mwu8FCHyXURFWosxRoILsMH-JuRglQGRJy48YhtBaUSVBEstQUZv-baAKylqqD8B9JdlgTpUScCITzXRsgU_hevC8FRbw01Kf28_3fo_S9u21BWQNKlZagTIqNbonpFQN34Ky7_He1gN3ng3UAn_9TZTtEcr_9kxza68U-YyqUBCyu071TQee3zl-KAwel_tL46MbD4jDKKUINtCNIQCXW_Vmgd0GsWWg">
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Stats -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-unit-lg rounded-xl text-center group">
+<div class="font-display-lg text-headline-md text-secondary mb-1 group-hover:scale-110 transition-transform">+30</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Proyectos</div>
+</div>
+<div class="glass-card p-unit-lg rounded-xl text-center group">
+<div class="font-display-lg text-headline-md text-secondary mb-1 group-hover:scale-110 transition-transform">98%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Satisfacción</div>
+</div>
+<div class="glass-card p-unit-lg rounded-xl text-center group">
+<div class="font-display-lg text-headline-md text-secondary mb-1 group-hover:scale-110 transition-transform">24h</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Respuesta</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Services -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="servicios">
+<div class="technical-glow top-0 right-0"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="flex flex-col gap-unit-sm mb-section-gap-mobile">
+<span class="font-label-sm text-label-sm text-secondary">Nuestras Capacidades</span>
+<h2 class="font-display-lg text-headline-md text-on-surface max-w-2xl">Ingeniería Web de Precisión</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-gutter">
+<!-- Service 1 -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md hover:-translate-y-2 transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Construcción</h3>
+<p class="font-body-md text-on-surface-variant">Diseñamos y desarrollamos tu sitio web desde cero, con una arquitectura pensada para crecer junto a tu negocio. Cuidamos cada detalle técnico y visual para que tu página no solo se vea profesional, sino que también sea rápida, segura y fácil de encontrar en internet.</p>
+</div>
+<!-- Service 2 -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md hover:-translate-y-2 transition-all group border-secondary/40">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined">brush</span>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Rediseño</h3>
+<p class="font-body-md text-on-surface-variant">Le damos una nueva vida a tu página actual. Modernizamos el diseño, mejoramos la navegación y transformamos una web desactualizada en una experiencia clara, atractiva y pensada para convertir a cada visitante en un cliente potencial.</p>
+</div>
+<!-- Service 3 -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md hover:-translate-y-2 transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Optimización</h3>
+<p class="font-body-md text-on-surface-variant">Analizamos a fondo el rendimiento de tu página: velocidad de carga, posicionamiento en buscadores y experiencia en dispositivos móviles. Corregimos cada punto débil para que tu web cargue en segundos y llegue a más clientes de forma orgánica.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Process -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden" id="proceso">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Cómo trabajamos</h2>
+<div class="relative grid md:grid-cols-4 gap-gutter">
+<!-- Connector Line -->
+<div class="hidden md:block absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-outline-variant to-transparent -z-10"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center gap-unit-md">
+<div class="w-16 h-16 rounded-full glass-card flex items-center justify-center relative border-secondary/20">
+<span class="material-symbols-outlined text-secondary">search</span>
+<div class="absolute -top-2 -right-2 bg-secondary text-on-secondary-fixed w-6 h-6 rounded-full text-[10px] flex items-center justify-center font-bold">01</div>
+</div>
+<h4 class="font-headline-md text-body-lg text-on-surface">Diagnóstico</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Conversamos contigo para entender tu negocio, tus objetivos y a tu cliente ideal, y así definir la mejor estrategia digital para ti.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center gap-unit-md">
+<div class="w-16 h-16 rounded-full glass-card flex items-center justify-center relative border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">draw</span>
+<div class="absolute -top-2 -right-2 bg-primary text-on-primary w-6 h-6 rounded-full text-[10px] flex items-center justify-center font-bold">02</div>
+</div>
+<h4 class="font-headline-md text-body-lg text-on-surface">Diseño</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Creamos un diseño visual atractivo y ordenado, cuidando cada detalle para que tu marca transmita confianza desde el primer segundo.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center gap-unit-md">
+<div class="w-16 h-16 rounded-full glass-card flex items-center justify-center relative border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">code</span>
+<div class="absolute -top-2 -right-2 bg-primary text-on-primary w-6 h-6 rounded-full text-[10px] flex items-center justify-center font-bold">03</div>
+</div>
+<h4 class="font-headline-md text-body-lg text-on-surface">Desarrollo</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Programamos tu página aplicando buenas prácticas de la industria, para que funcione de forma estable, rápida y sin sorpresas a futuro.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center gap-unit-md">
+<div class="w-16 h-16 rounded-full glass-card flex items-center justify-center relative border-outline-variant/20">
+<span class="material-symbols-outlined text-secondary">rocket_launch</span>
+<div class="absolute -top-2 -right-2 bg-secondary text-on-secondary-fixed w-6 h-6 rounded-full text-[10px] flex items-center justify-center font-bold">04</div>
+</div>
+<h4 class="font-headline-md text-body-lg text-on-surface">Lanzamiento</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Publicamos tu página, verificamos que todo funcione perfecto y te acompañamos con soporte una vez que ya está en línea.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 8: Testimonials -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<div class="technical-glow bottom-0 left-1/4"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Lo que dicen nuestros clientes</h2>
+<div class="relative max-w-3xl mx-auto min-h-[280px] sm:min-h-[220px]" id="testimonial-carousel">
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-100" data-index="0">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-secondary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "Trabajar con BaseCode fue el punto de inflexión para nuestra infraestructura. No solo diseñaron una web increíble, sino que optimizaron nuestra arquitectura reduciendo costos en un 30%."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Foto de Alex Rivera, CTO en NexaStream" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6WF8mKQvUxzF1uY1VwFdUTurDK9lQ5oZZOuZeuEJgptFcTbtvhESjIZAItrPJKqnZ7czQDvIfFrZDYLbivDyGIN2TGO5KiACgNXGQezgrK6xYrYh1vL3luZ-XQBRE8VUgIAH0pAKFl5qZ9z0GJTyM1HiTAVCq-0MO-u791_AK7Th9EXN27sZ8vuHgc69UHg43sLloN-xTtIQVwTLlcYNobG_zMxBeVCrMAfpMsxqTc_xA7bagP_GYvw">
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Alex Rivera</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">CTO @ NexaStream</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none" data-index="1">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-primary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "La atención al detalle técnico de BaseCode es inigualable. El sistema que construyeron para nosotros maneja millones de peticiones sin pestañear. Son verdaderos ingenieros."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Foto de Marta Soler, Founder en BloomAI" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPQF-ZGB2HCrGMgw5PtSRBvSoFQg292WWsukRojBWv34Z7aI7KeondhZkRL4E14_eXh0NIi-IukDxcyFUZ3IbHHr2hMykPhu0KMp5yLUANUmzZBNXv91GdKnSWFJUSwr261wOhcYyXw6PReXca8p63gf5XhPMiJwhwASrIunjpGfWu8fCMEFBIgulyADjKkasQP5O9zigGGNmbQH9y_mfE8eKXljlMvB1srRv1vhxgQh7ci8NAWlad_A">
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Marta Soler</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Founder @ BloomAI</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none" data-index="2">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-secondary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "Desde que lanzamos la nueva página con BaseCode notamos un aumento real en las consultas de clientes. El equipo entendió justo lo que necesitábamos."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full bg-primary/15 border border-outline-variant flex items-center justify-center font-label-sm text-primary">CM</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Carlos Medina</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Director Comercial @ Rutas Andinas</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none" data-index="3">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-primary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "Un servicio impecable de principio a fin. La comunicación fue clara en cada etapa y el resultado superó lo que esperábamos para nuestro negocio."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full bg-secondary/15 border border-outline-variant flex items-center justify-center font-label-sm text-secondary">FV</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Fiorella Vidal</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Gerente General @ Vidal Repuestos</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none" data-index="4">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-secondary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "BaseCode no solo nos construyó una página, nos entregó una herramienta que hoy es clave para captar nuevos clientes cada semana."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full bg-primary/15 border border-outline-variant flex items-center justify-center font-label-sm text-primary">DS</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Diego Salazar</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">CEO @ UrbanFit</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none" data-index="5">
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md italic border-l-4 border-l-primary h-full justify-between">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        "Profesionales, puntuales y muy atentos a los detalles. Recomiendo totalmente su trabajo a cualquier negocio que quiera dar el salto digital."
+                    </p>
+<div class="flex items-center gap-unit-md mt-unit-sm not-italic">
+<div class="w-12 h-12 rounded-full bg-secondary/15 border border-outline-variant flex items-center justify-center font-label-sm text-secondary">LP</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Lucía Paredes</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Marketing Manager @ NovaHealth</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center gap-2 mt-unit-lg" id="testimonial-dots">
+<button aria-label="Reseña 1" class="w-2.5 h-2.5 rounded-full bg-secondary transition-colors" data-dot="0"></button>
+<button aria-label="Reseña 2" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="1"></button>
+<button aria-label="Reseña 3" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="2"></button>
+<button aria-label="Reseña 4" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="3"></button>
+<button aria-label="Reseña 5" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="4"></button>
+<button aria-label="Reseña 6" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="5"></button>
+</div>
+</div>
+</section>
+<!-- Section 9: Pricing -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="precios">
+<div class="technical-glow top-0 left-1/4"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="flex flex-col gap-unit-sm mb-section-gap-mobile text-center items-center">
+<span class="font-label-sm text-label-sm text-secondary">Inversión Transparente</span>
+<h2 class="font-display-lg text-headline-md text-on-surface max-w-2xl">Planes a tu medida</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl">Elige el plan que mejor se adapte a la etapa de tu negocio. Sin costos ocultos, sin sorpresas.</p>
+</div>
+<!-- Web Page Plans -->
+<div class="grid md:grid-cols-2 gap-gutter mb-section-gap-mobile">
+<!-- Plan Esencial -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Plan Esencial</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-on-surface">S/ 1,500</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">pago único</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm mt-1">Tu página web profesional, lista para empezar a captar clientes desde el primer día.</p>
+</div>
+<ul class="flex flex-col gap-3 mt-unit-sm">
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Diseño web a medida (hasta 5 secciones)</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> 100% responsive (móvil, tablet y escritorio)</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Formulario de contacto y botón de WhatsApp</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Optimización SEO básica</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> 1 ronda de ajustes incluida</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Entrega en 5 a 10 días hábiles</li>
+</ul>
+<div class="mt-auto pt-unit-md border-t border-outline-variant/20">
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase mb-2">Forma de pago</p>
+<p class="font-body-md text-sm text-on-surface-variant">40% al iniciar el proyecto (S/ 600) + 60% restante al finalizar y entregar la página (S/ 900).</p>
+</div>
+<button class="border border-outline-variant hover:border-secondary text-on-surface px-6 py-3 rounded-lg font-label-sm text-label-sm transition-colors mt-unit-sm" onclick="openPaymentModal('esencial')">
+                        Elegir Plan Esencial
+                    </button>
+</div>
+<!-- Plan Avanzado -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md border-secondary/40 relative">
+<span class="absolute -top-3 right-unit-lg bg-secondary text-on-secondary-fixed font-label-xs text-label-xs uppercase px-3 py-1 rounded-full">Recomendado</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase">Plan Avanzado</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-on-surface">S/ 1,800</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">pago único</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm mt-1">Una versión más pulida y detallada de tu web, pensada para negocios que quieren destacar frente a la competencia.</p>
+</div>
+<ul class="flex flex-col gap-3 mt-unit-sm">
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Todo lo incluido en el Plan Esencial</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Diseño premium con maquetación y microinteracciones más cuidadas</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Estructura ampliada (hasta 8 secciones/páginas)</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Galería de productos/portfolio totalmente personalizada</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> SEO avanzado y optimización de velocidad de carga</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Dominio incluido durante el primer año</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Agentes de Inteligencia Artificial integrados (chatbot / asistente virtual)</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> 2 rondas de ajustes incluidas</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Entrega en 1 a 3 semanas</li>
+</ul>
+<div class="mt-auto pt-unit-md border-t border-outline-variant/20">
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase mb-2">Forma de pago</p>
+<p class="font-body-md text-sm text-on-surface-variant">40% al iniciar el proyecto (S/ 720) + 60% restante al finalizar y entregar la página (S/ 1,080).</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity mt-unit-sm" onclick="openPaymentModal('avanzado')">
+                        Elegir Plan Avanzado
+                    </button>
+</div>
+</div>
+<!-- Maintenance Plans -->
+<div class="flex flex-col gap-unit-sm mb-section-gap-mobile text-center items-center">
+<span class="font-label-sm text-label-sm text-secondary">Después del Lanzamiento</span>
+<h3 class="font-display-lg text-headline-md text-on-surface max-w-2xl">Planes de Mantenimiento</h3>
+<p class="font-body-md text-on-surface-variant max-w-xl">Tu página siempre actualizada y funcionando, sin que tengas que preocuparte por nada técnico.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-gutter">
+<!-- Monthly -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mensual</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-on-surface">S/ 150</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">/ mes</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">Sin permanencia, ideal para empezar.</p>
+<ul class="flex flex-col gap-3 mt-unit-sm">
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> 2 ediciones de la página al mes</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Soporte técnico básico</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Monitoreo y actualizaciones de seguridad</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Cancela cuando quieras</li>
+</ul>
+<button class="border border-outline-variant hover:border-secondary text-on-surface px-6 py-3 rounded-lg font-label-sm text-label-sm transition-colors mt-auto" onclick="openPaymentModal('mensual')">
+                        Contratar Mensual
+                    </button>
+</div>
+<!-- 6-month -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md border-secondary/40 relative">
+<span class="absolute -top-3 right-unit-lg bg-secondary text-on-secondary-fixed font-label-xs text-label-xs uppercase px-3 py-1 rounded-full">Ahorra 20%</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Semestral</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-on-surface">S/ 720</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">cada 6 meses</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">Equivale a S/ 120 al mes · Ahorras S/ 180</p>
+<ul class="flex flex-col gap-3 mt-unit-sm">
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> 4 ediciones de la página al mes</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Soporte técnico prioritario</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Monitoreo y actualizaciones de seguridad</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Copia de seguridad (backup) mensual de tu página</li>
+</ul>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity mt-auto" onclick="openPaymentModal('semestral')">
+                        Contratar Semestral
+                    </button>
+</div>
+<!-- Annual -->
+<div class="glass-card p-unit-lg rounded-xl flex flex-col gap-unit-md relative">
+<span class="absolute -top-3 right-unit-lg bg-secondary text-on-secondary-fixed font-label-xs text-label-xs uppercase px-3 py-1 rounded-full">Mejor valor · Ahorra 33%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Anual</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-on-surface">S/ 1,200</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">al año</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">Equivale a S/ 100 al mes · Ahorras S/ 600</p>
+<ul class="flex flex-col gap-3 mt-unit-sm">
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Ediciones de la página ilimitadas al mes</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Actualización de la página cuando tu negocio lo requiera</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Soporte técnico prioritario con línea directa</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Copias de seguridad (backup) automáticas semanales</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Informe mensual de rendimiento y analítica de visitas</li>
+<li class="flex items-start gap-3 font-body-md text-sm text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-lg">check_circle</span> Prioridad máxima en soporte (respuesta en menos de 4h)</li>
+</ul>
+<button class="border border-outline-variant hover:border-secondary text-on-surface px-6 py-3 rounded-lg font-label-sm text-label-sm transition-colors mt-auto" onclick="openPaymentModal('anual')">
+                        Contratar Anual
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 10: Why Us -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop" id="nosotros">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Por qué elegir BaseCode</h2>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-unit-sm items-center text-center p-unit-md hover:bg-surface-container-low rounded-xl transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl">support_agent</span>
+<h5 class="font-label-sm text-on-surface">Soporte 24/7</h5>
+<p class="font-label-xs text-on-surface-variant">Estamos aquí cuando nos necesitas.</p>
+</div>
+<div class="flex flex-col gap-unit-sm items-center text-center p-unit-md hover:bg-surface-container-low rounded-xl transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl">inventory_2</span>
+<h5 class="font-label-sm text-on-surface">No Templates</h5>
+<p class="font-label-xs text-on-surface-variant">Código artesanal y único.</p>
+</div>
+<div class="flex flex-col gap-unit-sm items-center text-center p-unit-md hover:bg-surface-container-low rounded-xl transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl">search_check</span>
+<h5 class="font-label-sm text-on-surface">SEO Included</h5>
+<p class="font-label-xs text-on-surface-variant">Visible desde el primer día.</p>
+</div>
+<div class="flex flex-col gap-unit-sm items-center text-center p-unit-md hover:bg-surface-container-low rounded-xl transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl">shield_locked</span>
+<h5 class="font-label-sm text-on-surface">Security First</h5>
+<p class="font-label-xs text-on-surface-variant">Protección de datos garantizada.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 11: FAQ -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Preguntas frecuentes</h2>
+<div class="space-y-4">
+<details class="glass-card rounded-xl overflow-hidden group">
+<summary class="p-unit-lg cursor-pointer flex justify-between items-center font-label-sm text-on-surface list-none">
+                        ¿Cuánto tiempo toma tener mi página lista?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-unit-lg pb-unit-lg text-on-surface-variant text-sm">
+                        Depende del plan que elijas: el Plan Esencial está listo en 5 a 10 días hábiles, y el Plan Avanzado en 1 a 3 semanas.
+                    </div>
+</details>
+<details class="glass-card rounded-xl overflow-hidden group">
+<summary class="p-unit-lg cursor-pointer flex justify-between items-center font-label-sm text-on-surface list-none">
+                        ¿Trabajan con negocios fuera de mi ciudad?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-unit-lg pb-unit-lg text-on-surface-variant text-sm">
+                        Sí, trabajamos de forma 100% remota con clientes en distintas ciudades y países, sin ningún problema.
+                    </div>
+</details>
+<details class="glass-card rounded-xl overflow-hidden group">
+<summary class="p-unit-lg cursor-pointer flex justify-between items-center font-label-sm text-on-surface list-none">
+                        ¿Necesito saber de tecnología para tener mi página?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-unit-lg pb-unit-lg text-on-surface-variant text-sm">
+                        Para nada. Nosotros nos encargamos de toda la parte técnica: tú solo nos cuentas tu idea y nosotros la hacemos realidad.
+                    </div>
+</details>
+<details class="glass-card rounded-xl overflow-hidden group">
+<summary class="p-unit-lg cursor-pointer flex justify-between items-center font-label-sm text-on-surface list-none">
+                        ¿Qué pasa después de que mi página esté lista?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-unit-lg pb-unit-lg text-on-surface-variant text-sm">
+                        Ofrecemos planes de mantenimiento mensuales, semestrales y anuales para que tu página siempre esté actualizada y funcionando sin problemas.
+                    </div>
+</details>
+</div>
+</div>
+</section>
+<!-- Section 12: Final CTA + Form -->
+<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative" id="contacto">
+<div class="technical-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="width: 800px; height: 800px; background: radial-gradient(circle, rgba(2, 102, 255, 0.05) 0%, transparent 70%);"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="glass-card rounded-2xl overflow-hidden grid lg:grid-cols-2">
+<div class="p-section-gap-mobile bg-primary/5 flex flex-col justify-center gap-unit-md border-r border-outline-variant/30">
+<h2 class="font-display-lg text-headline-md text-on-surface">¿Listo para evolucionar?</h2>
+<p class="font-body-lg text-on-surface-variant">Lleva tu startup al siguiente nivel con ingeniería de clase mundial. No somos solo programadores, somos tus socios tecnológicos.</p>
+<ul class="space-y-4 mt-unit-md">
+<li class="flex items-center gap-3 font-label-sm"><span class="material-symbols-outlined text-secondary">verified</span> Consultoría inicial gratuita</li>
+<li class="flex items-center gap-3 font-label-sm"><span class="material-symbols-outlined text-secondary">verified</span> Presupuesto cerrado sin sorpresas</li>
+<li class="flex items-center gap-3 font-label-sm"><span class="material-symbols-outlined text-secondary">verified</span> Entrega garantizada por contrato</li>
+</ul>
+<a class="flex items-center gap-3 font-label-sm text-on-surface-variant hover:text-secondary transition-colors mt-unit-md" href="mailto:ceccawebs@gmail.com">
+<span class="material-symbols-outlined text-secondary">mail</span> ceccawebs@gmail.com
+</a>
+</div>
+<div class="p-section-gap-mobile">
+<form class="flex flex-col gap-unit-md" id="contact-form">
+<div class="grid md:grid-cols-2 gap-unit-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Nombre</label>
+<input class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="contact-name" placeholder="Tu nombre" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Email</label>
+<input class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="contact-email" placeholder="email@ejemplo.com" required="" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Mensaje</label>
+<textarea class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="contact-message" placeholder="Cuéntanos sobre tu proyecto..." required="" rows="4"></textarea>
+</div>
+<button class="bg-primary text-on-primary py-4 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity mt-unit-sm" type="submit">
+                            Contáctanos
+                        </button>
+<p class="font-label-xs text-label-xs text-secondary hidden" id="contact-confirmation">¡Listo! Se abrió WhatsApp con tu mensaje, solo confirma el envío.</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 13: Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 px-margin-mobile md:px-margin-desktop py-section-gap-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-4 flex flex-col gap-unit-md">
+<span class="font-display-lg text-headline-md"><span class="text-on-surface">Base</span><span class="text-secondary">Code</span></span>
+<p class="font-body-md text-on-surface-variant max-w-xs">Agencia de ingeniería web de alto rendimiento. Construimos productos digitales que definen industrias.</p>
+<a class="text-sm text-on-surface-variant hover:text-secondary transition-colors flex items-center gap-2" href="mailto:ceccawebs@gmail.com"><span class="material-symbols-outlined text-lg">mail</span> ceccawebs@gmail.com</a>
+<div class="flex gap-4 mt-unit-sm items-center flex-wrap">
+<a class="w-10 h-10 glass-card rounded-full flex items-center justify-center text-on-surface-variant hover:text-secondary" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="w-10 h-10 glass-card rounded-full flex items-center justify-center text-on-surface-variant hover:text-secondary" href="#"><span class="material-symbols-outlined text-lg">terminal</span></a>
+<span class="w-10 h-10 glass-card rounded-full flex items-center justify-center text-on-surface-variant opacity-50 cursor-not-allowed" title="Próximamente">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163C18.162 8.597 15.403 5.838 12 5.838zM12 16c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</span>
+<span class="w-10 h-10 glass-card rounded-full flex items-center justify-center text-on-surface-variant opacity-50 cursor-not-allowed" title="Próximamente">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 3c.3 2.1 1.7 3.8 3.8 4.1v3.1c-1.4.1-2.7-.3-3.8-1v6.3c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.2-.9-.2-1.6 0-2.9 1.3-2.9 2.9s1.3 2.9 2.9 2.9 2.9-1.3 2.9-2.9V3h3.1z"></path></svg>
+</span>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant opacity-70">Instagram y TikTok: próximamente</p>
+</div>
+<div class="md:col-span-2 flex flex-col gap-unit-md">
+<h6 class="font-label-sm text-on-surface uppercase">Servicios</h6>
+<ul class="flex flex-col gap-2">
+<li class=""><a class="text-sm text-on-surface-variant hover:text-secondary" href="#servicios">Construcción de páginas</a></li>
+<li class=""><a class="text-sm text-on-surface-variant hover:text-secondary" href="#servicios">Rediseño web</a></li>
+<li class=""><a class="text-sm text-on-surface-variant hover:text-secondary" href="#servicios">Optimización y SEO</a></li>
+</ul>
+</div>
+<div class="md:col-span-2 flex flex-col gap-unit-md">
+<h6 class="font-label-sm text-on-surface uppercase">Agencia</h6>
+<ul class="flex flex-col gap-2">
+<li class=""><span class="text-sm text-on-surface-variant opacity-50 cursor-not-allowed" title="Próximamente">Portfolio</span></li>
+<li class=""><span class="text-sm text-on-surface-variant opacity-50 cursor-not-allowed" title="Próximamente">Sobre Nosotros</span></li>
+<li class=""><span class="text-sm text-on-surface-variant opacity-50 cursor-not-allowed" title="Próximamente">Blog Técnico</span></li>
+</ul>
+</div>
+<div class="md:col-span-4 flex flex-col gap-unit-md">
+<h6 class="font-label-sm text-on-surface uppercase">Newsletter</h6>
+<p class="text-sm text-on-surface-variant">Recibe insights técnicos semanales.</p>
+<div class="flex gap-2">
+<input class="bg-surface-container-low border-outline-variant/30 rounded-lg text-sm w-full focus:ring-0 focus:border-secondary" id="newsletter-email" placeholder="email@ejemplo.com" type="email"/>
+<button class="bg-surface-container-high px-4 rounded-lg hover:bg-secondary hover:text-on-secondary-fixed transition-colors" id="newsletter-submit" type="button"><span class="material-symbols-outlined">send</span></button>
+</div>
+<p class="font-label-xs text-on-surface-variant mt-section-gap-mobile">© 2024 BaseCode Agency. Todos los derechos reservados.</p>
+<div class="flex gap-4">
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:text-secondary underline" href="privacidad.html">Política de Privacidad</a>
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:text-secondary underline" href="terminos.html">Términos de Servicio</a>
+</div>
+</div>
+</footer>
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-unit-lg right-unit-lg w-16 h-16 bg-secondary text-on-secondary-fixed rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(99,247,255,0.4)] z-[100] hover:scale-110 transition-transform animate-bounce" href="https://wa.me/51934676211" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">chat</span>
+</a>
+<!-- Payment Method Modal -->
+<div class="fixed inset-0 z-[200] hidden items-center justify-center p-margin-mobile" id="payment-modal">
+<div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closePaymentModal()"></div>
+<div class="glass-card rounded-2xl max-w-md w-full p-unit-lg relative z-10">
+<button aria-label="Cerrar" class="absolute top-4 right-4 text-on-surface-variant hover:text-secondary transition-colors" onclick="closePaymentModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<span class="font-label-sm text-label-sm text-secondary uppercase" id="payment-modal-plan">Plan</span>
+<h3 class="font-display-lg text-headline-md text-on-surface mt-1 mb-unit-md" id="payment-modal-price">S/ 0</h3>
+<p class="font-body-md text-sm text-on-surface-variant mb-unit-md">Elige tu forma de pago preferida:</p>
+<div class="flex flex-col gap-3" id="payment-modal-methods"></div>
+<a class="mt-unit-lg bg-primary text-on-primary py-3 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity" href="#" id="payment-modal-whatsapp" rel="noopener noreferrer" target="_blank">
+                    Coordinar por WhatsApp
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+</div>
+</div>
+<script>
+        // Micro-interaction for Sticky Header background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+            }
+        });
+
+        // Simple smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Testimonial carousel: auto-rotate + manual dots
+        (function () {
+            const slides = document.querySelectorAll('#testimonial-carousel .testimonial-slide');
+            const dots = document.querySelectorAll('#testimonial-dots [data-dot]');
+            if (!slides.length) return;
+            let current = 0;
+            let timer;
+
+            function show(index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.remove('opacity-0', 'pointer-events-none');
+                        slide.classList.add('opacity-100');
+                    } else {
+                        slide.classList.remove('opacity-100');
+                        slide.classList.add('opacity-0', 'pointer-events-none');
+                    }
+                });
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-secondary', i === index);
+                    dot.classList.toggle('bg-outline-variant', i !== index);
+                });
+                current = index;
+            }
+
+            function next() {
+                show((current + 1) % slides.length);
+            }
+
+            function startAutoplay() {
+                clearInterval(timer);
+                timer = setInterval(next, 6000);
+            }
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    show(i);
+                    startAutoplay();
+                });
+            });
+
+            show(0);
+            startAutoplay();
+        })();
+
+        // Payment method modal
+        const paymentMethodsInfo = {
+            bank: {
+                label: 'Transferencia bancaria',
+                sub: 'BCP, BBVA, Interbank, Scotiabank',
+                icon: '<span class="material-symbols-outlined">account_balance</span>'
+            },
+            interbank: {
+                label: 'Transferencia interbancaria',
+                sub: 'Entre distintos bancos, vía CCI',
+                icon: '<span class="material-symbols-outlined">sync_alt</span>'
+            },
+            card: {
+                label: 'Tarjeta de crédito o débito',
+                sub: 'Visa, Mastercard',
+                icon: '<span class="material-symbols-outlined">credit_card</span>'
+            },
+            yape: {
+                label: 'Yape',
+                sub: 'Pago rápido desde tu celular',
+                icon: '<span class="font-label-xs text-label-xs font-bold">YAPE</span>'
+            }
+        };
+
+        const paymentPlans = {
+            esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank', 'card'] },
+            avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank', 'card'] },
+            mensual: { name: 'Mantenimiento Mensual', price: 'S/ 150 / mes', methods: ['bank', 'interbank', 'yape'] },
+            semestral: { name: 'Mantenimiento Semestral', price: 'S/ 720 cada 6 meses', methods: ['bank', 'interbank', 'card'] },
+            anual: { name: 'Mantenimiento Anual', price: 'S/ 1,200 al año', methods: ['bank', 'interbank', 'card'] }
+        };
+
+        function openPaymentModal(planKey) {
+            const plan = paymentPlans[planKey];
+            if (!plan) return;
+            document.getElementById('payment-modal-plan').textContent = plan.name;
+            document.getElementById('payment-modal-price').textContent = plan.price;
+
+            const methodsContainer = document.getElementById('payment-modal-methods');
+            methodsContainer.innerHTML = plan.methods.map(key => {
+                const m = paymentMethodsInfo[key];
+                return `
+                    <div class="flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low">
+                        <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">${m.icon}</div>
+                        <div>
+                            <p class="font-label-sm text-label-sm text-on-surface">${m.label}</p>
+                            <p class="font-body-md text-xs text-on-surface-variant">${m.sub}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const whatsappMessage = `Hola, quiero contratar el ${plan.name} (${plan.price}).`;
+            document.getElementById('payment-modal-whatsapp').href = `https://wa.me/51934676211?text=${encodeURIComponent(whatsappMessage)}`;
+
+            const modal = document.getElementById('payment-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Contact form: se envía por WhatsApp. El correo (mailto) queda disponible como
+        // canal alternativo en la web. Si más adelante se quiere que el formulario también
+        // mande copia automática por email, se puede integrar un servicio como Web3Forms o
+        // Formspree usando CONTACT_EMAIL.
+        const WHATSAPP_NUMBER = '51934676211';
+        const CONTACT_EMAIL = 'ceccawebs@gmail.com';
+
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('contact-name').value.trim();
+                const email = document.getElementById('contact-email').value.trim();
+                const message = document.getElementById('contact-message').value.trim();
+
+                const text = `Hola, soy ${name}.\nMi email: ${email}\n\n${message}`;
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+
+                const confirmation = document.getElementById('contact-confirmation');
+                confirmation.classList.remove('hidden');
+                contactForm.reset();
+            });
+        }
+
+        // Newsletter: por ahora también confirma la suscripción por WhatsApp.
+        const newsletterButton = document.getElementById('newsletter-submit');
+        if (newsletterButton) {
+            newsletterButton.addEventListener('click', () => {
+                const emailInput = document.getElementById('newsletter-email');
+                const email = emailInput.value.trim();
+                if (!email || !email.includes('@')) {
+                    emailInput.classList.add('border-red-400');
+                    emailInput.focus();
+                    return;
+                }
+                emailInput.classList.remove('border-red-400');
+                const text = `Hola, quiero suscribirme al newsletter de BaseCode con este correo: ${email}`;
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+                emailInput.value = '';
+            });
+        }
+    </script>
+
+
+</body></html>
