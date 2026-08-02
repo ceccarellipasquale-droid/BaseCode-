@@ -716,6 +716,29 @@
 <a class="fixed bottom-unit-lg right-unit-lg w-16 h-16 bg-secondary text-on-secondary-fixed rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(99,247,255,0.4)] z-[100] hover:scale-110 transition-transform animate-bounce" href="https://wa.me/51934676211" rel="noopener noreferrer" target="_blank">
 <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">chat</span>
 </a>
+<!-- Floating AI Chat Button -->
+<button aria-label="Abrir asistente" class="fixed bottom-[104px] right-unit-lg w-16 h-16 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(2,102,255,0.4)] z-[100] hover:scale-110 transition-transform" id="ai-chat-toggle" type="button">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</button>
+<!-- AI Chat Panel -->
+<div class="fixed bottom-[184px] right-unit-lg z-[150] hidden w-[90vw] max-w-sm h-[70vh] max-h-[560px] flex-col glass-card rounded-2xl overflow-hidden shadow-2xl" id="ai-chat-panel">
+<div class="flex items-center justify-between p-unit-md border-b border-outline-variant/30 bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<span class="font-label-sm text-label-sm text-on-surface">Asistente BaseCode</span>
+</div>
+<button aria-label="Cerrar" class="text-on-surface-variant hover:text-secondary transition-colors" id="ai-chat-close" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-unit-md flex flex-col gap-3 text-sm" id="ai-chat-messages"></div>
+<form class="flex items-center gap-2 p-unit-sm border-t border-outline-variant/30" id="ai-chat-form">
+<input autocomplete="off" class="flex-1 bg-surface-container-low border-outline-variant/30 rounded-lg text-sm focus:ring-0 focus:border-secondary" id="ai-chat-input" placeholder="Escribí tu pregunta..." type="text"/>
+<button aria-label="Enviar" class="bg-primary text-on-primary w-10 h-10 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shrink-0" type="submit">
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</form>
+</div>
 <!-- Payment Method Modal -->
 <div class="fixed inset-0 z-[200] hidden items-center justify-center p-margin-mobile" id="payment-modal">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closePaymentModal()"></div>
@@ -910,6 +933,89 @@
                 emailInput.value = '';
             });
         }
+
+        // AI Chat widget
+        (function () {
+            const toggleBtn = document.getElementById('ai-chat-toggle');
+            const panel = document.getElementById('ai-chat-panel');
+            const closeBtn = document.getElementById('ai-chat-close');
+            const messagesEl = document.getElementById('ai-chat-messages');
+            const form = document.getElementById('ai-chat-form');
+            const input = document.getElementById('ai-chat-input');
+            if (!toggleBtn || !panel) return;
+
+            let history = [];
+            let opened = false;
+
+            function addMessage(role, text) {
+                const bubble = document.createElement('div');
+                bubble.className = role === 'user'
+                    ? 'self-end bg-primary text-on-primary px-3 py-2 rounded-lg rounded-br-sm max-w-[85%] whitespace-pre-wrap'
+                    : 'self-start bg-surface-container-low text-on-surface px-3 py-2 rounded-lg rounded-bl-sm max-w-[85%] border border-outline-variant/20 whitespace-pre-wrap';
+                bubble.textContent = text;
+                messagesEl.appendChild(bubble);
+                messagesEl.scrollTop = messagesEl.scrollHeight;
+            }
+
+            function addTyping() {
+                const bubble = document.createElement('div');
+                bubble.id = 'ai-chat-typing';
+                bubble.className = 'self-start text-on-surface-variant px-3 py-2 text-xs italic';
+                bubble.textContent = 'Escribiendo...';
+                messagesEl.appendChild(bubble);
+                messagesEl.scrollTop = messagesEl.scrollHeight;
+            }
+
+            function removeTyping() {
+                const el = document.getElementById('ai-chat-typing');
+                if (el) el.remove();
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                const willShow = panel.classList.contains('hidden');
+                panel.classList.toggle('hidden');
+                panel.classList.toggle('flex');
+
+                if (willShow && !opened) {
+                    opened = true;
+                    addMessage('assistant', '¡Hola! Soy el asistente de BaseCode 👋 Preguntame sobre nuestros planes, precios o cómo trabajamos. Cuando ya sepas qué querés, te paso directo a WhatsApp para cerrarlo con nosotros.');
+                }
+            });
+
+            closeBtn.addEventListener('click', () => {
+                panel.classList.add('hidden');
+                panel.classList.remove('flex');
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const text = input.value.trim();
+                if (!text) return;
+                input.value = '';
+                addMessage('user', text);
+                history.push({ role: 'user', content: text });
+                addTyping();
+
+                try {
+                    const res = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ messages: history }),
+                    });
+                    const data = await res.json();
+                    removeTyping();
+                    if (!res.ok) {
+                        addMessage('assistant', data.error || 'Hubo un problema. Escribinos directo por WhatsApp mientras tanto.');
+                        return;
+                    }
+                    addMessage('assistant', data.reply);
+                    history.push({ role: 'assistant', content: data.reply });
+                } catch (err) {
+                    removeTyping();
+                    addMessage('assistant', 'No pude conectarme. Escribinos por WhatsApp mientras lo resolvemos.');
+                }
+            });
+        })();
     </script>
 
 
