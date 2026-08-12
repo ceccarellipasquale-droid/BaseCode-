@@ -885,12 +885,14 @@
             }
         };
 
+        const MERCADOPAGO_LINK = 'https://link.mercadopago.com.pe/basecode';
+
         const paymentPlans = {
-            esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank'] },
-            avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank'] },
+            esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 600 },
+            avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 720 },
             mensual: { name: 'Mantenimiento Mensual', price: 'S/ 150 / mes', methods: ['bank', 'interbank', 'yape'] },
-            semestral: { name: 'Mantenimiento Semestral', price: 'S/ 720 cada 6 meses', methods: ['bank', 'interbank'] },
-            anual: { name: 'Mantenimiento Anual', price: 'S/ 1,200 al año', methods: ['bank', 'interbank'] }
+            semestral: { name: 'Mantenimiento Semestral', price: 'S/ 720 cada 6 meses', methods: ['bank', 'interbank', 'card'], cardAmount: 720 },
+            anual: { name: 'Mantenimiento Anual', price: 'S/ 1,200 al año', methods: ['bank', 'interbank', 'card'], cardAmount: 1200 }
         };
 
         function openPaymentModal(planKey) {
@@ -902,6 +904,21 @@
             const methodsContainer = document.getElementById('payment-modal-methods');
             methodsContainer.innerHTML = plan.methods.map(key => {
                 const m = paymentMethodsInfo[key];
+
+                if (key === 'card') {
+                    const sub = `Ingresa S/ ${plan.cardAmount} en la página de MercadoPago`;
+                    return `
+                        <a class="flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low hover:border-secondary transition-colors" href="${MERCADOPAGO_LINK}" rel="noopener noreferrer" target="_blank">
+                            <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">${m.icon}</div>
+                            <div>
+                                <p class="font-label-sm text-label-sm text-on-surface">${m.label}</p>
+                                <p class="font-body-md text-xs text-on-surface-variant">${sub}</p>
+                            </div>
+                            <span class="material-symbols-outlined text-on-surface-variant ml-auto">open_in_new</span>
+                        </a>
+                    `;
+                }
+
                 return `
                     <div class="flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low">
                         <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">${m.icon}</div>
