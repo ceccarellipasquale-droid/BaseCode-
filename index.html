@@ -169,7 +169,7 @@
 <!-- Section 1: Header -->
 <header class="docked full-width top-0 sticky z-50 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop h-20 flex justify-between items-center transition-transform">
 <div class="flex items-center gap-unit-sm">
-<img alt="BaseCode" class="h-14 w-auto" src="assets/logo-basecode.jpg"/>
+<img alt="BaseCode" class="h-11 md:h-14 w-auto" src="assets/logo-basecode.jpg"/>
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#servicios">Servicios</a>
@@ -178,12 +178,28 @@
 <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#nosotros">Nosotros</a>
 <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#contacto">Contacto</a>
 </nav>
-<a class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm hover:scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(2,102,255,0.3)] cursor-pointer" href="#precios">
+<a class="hidden md:inline-block bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm hover:scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(2,102,255,0.3)] cursor-pointer" href="#precios">
             Empezar Proyecto
         </a>
+<button aria-label="Abrir menú" class="md:hidden text-on-surface w-10 h-10 flex items-center justify-center" id="mobile-menu-toggle" type="button">
+<span class="material-symbols-outlined text-3xl" id="mobile-menu-icon">menu</span>
+</button>
 </header>
+<!-- Mobile Menu Panel -->
+<div class="hidden md:hidden fixed inset-x-0 top-20 z-40 bg-surface-container/95 backdrop-blur-xl border-b border-outline-variant/30" id="mobile-menu">
+<nav class="flex flex-col p-margin-mobile gap-1">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary py-3 border-b border-outline-variant/10" href="#servicios">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary py-3 border-b border-outline-variant/10" href="#proceso">Proceso</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary py-3 border-b border-outline-variant/10" href="#precios">Planes</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary py-3 border-b border-outline-variant/10" href="#nosotros">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary py-3" href="#contacto">Contacto</a>
+<a class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm text-center mt-unit-sm" href="#precios">
+                Empezar Proyecto
+            </a>
+</nav>
+</div>
 <!-- Section 2: Hero -->
-<section class="relative pt-section-gap-desktop pb-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden">
+<section class="relative pt-section-gap-mobile md:pt-section-gap-desktop pb-section-gap-mobile md:pb-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden">
 <div class="technical-glow -top-20 -left-20"></div>
 <div class="technical-glow bottom-0 right-0" style="background: radial-gradient(circle, rgba(2, 102, 255, 0.05) 0%, transparent 70%);"></div>
 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-gutter items-center relative z-10">
@@ -213,7 +229,7 @@
 </div>
 </section>
 <!-- Section 4: Stats -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop">
 <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-gutter">
 <div class="glass-card p-unit-lg rounded-xl text-center group">
 <div class="font-display-lg text-headline-md text-secondary mb-1 group-hover:scale-110 transition-transform">+30</div>
@@ -230,7 +246,7 @@
 </div>
 </section>
 <!-- Section 5: Services -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="servicios">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="servicios">
 <div class="technical-glow top-0 right-0"></div>
 <div class="max-w-7xl mx-auto relative z-10">
 <div class="flex flex-col gap-unit-sm mb-section-gap-mobile">
@@ -266,7 +282,7 @@
 </div>
 </section>
 <!-- Section 6: Process -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden" id="proceso">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop overflow-hidden" id="proceso">
 <div class="max-w-7xl mx-auto">
 <h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Cómo trabajamos</h2>
 <div class="relative grid md:grid-cols-4 gap-gutter">
@@ -312,7 +328,7 @@
 </div>
 </section>
 <!-- Section 8: Testimonials -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative overflow-hidden">
 <div class="technical-glow bottom-0 left-1/4"></div>
 <div class="max-w-7xl mx-auto relative z-10">
 <h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Lo que dicen nuestros clientes</h2>
@@ -417,7 +433,7 @@
 </div>
 </section>
 <!-- Section 9: Pricing -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="precios">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50 relative overflow-hidden" id="precios">
 <div class="technical-glow top-0 left-1/4"></div>
 <div class="max-w-7xl mx-auto relative z-10">
 <div class="flex flex-col gap-unit-sm mb-section-gap-mobile text-center items-center">
@@ -553,7 +569,7 @@
 </div>
 </section>
 <!-- Section 10: Why Us -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop" id="nosotros">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop" id="nosotros">
 <div class="max-w-7xl mx-auto">
 <div class="flex flex-col gap-unit-sm items-center text-center mb-section-gap-mobile">
 <span class="font-label-sm text-label-sm text-secondary">Sobre Nosotros</span>
@@ -598,7 +614,7 @@
 </div>
 </section>
 <!-- Section 11: FAQ -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-lowest/50">
 <div class="max-w-3xl mx-auto">
 <h2 class="font-display-lg text-headline-md text-on-surface mb-section-gap-mobile text-center">Preguntas frecuentes</h2>
 <div class="space-y-4">
@@ -642,11 +658,11 @@
 </div>
 </section>
 <!-- Section 12: Final CTA + Form -->
-<section class="py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative" id="contacto">
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop relative overflow-hidden" id="contacto">
 <div class="technical-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="width: 800px; height: 800px; background: radial-gradient(circle, rgba(2, 102, 255, 0.05) 0%, transparent 70%);"></div>
 <div class="max-w-7xl mx-auto relative z-10">
 <div class="glass-card rounded-2xl overflow-hidden grid lg:grid-cols-2">
-<div class="p-section-gap-mobile bg-primary/5 flex flex-col justify-center gap-unit-md border-r border-outline-variant/30">
+<div class="p-margin-mobile md:p-section-gap-mobile bg-primary/5 flex flex-col justify-center gap-unit-md border-r border-outline-variant/30">
 <h2 class="font-display-lg text-headline-md text-on-surface">¿Listo para evolucionar?</h2>
 <p class="font-body-lg text-on-surface-variant">Lleva tu startup al siguiente nivel con ingeniería de clase mundial. No somos solo programadores, somos tus socios tecnológicos.</p>
 <ul class="space-y-4 mt-unit-md">
@@ -658,7 +674,7 @@
 <span class="material-symbols-outlined text-secondary">mail</span> ceccawebs@gmail.com
 </a>
 </div>
-<div class="p-section-gap-mobile">
+<div class="p-margin-mobile md:p-section-gap-mobile">
 <form class="flex flex-col gap-unit-md" id="contact-form">
 <div class="grid md:grid-cols-2 gap-unit-md">
 <div class="flex flex-col gap-1">
@@ -684,7 +700,7 @@
 </div>
 </section>
 <!-- Section 13: Footer -->
-<footer class="bg-surface-container-lowest border-t border-outline-variant/20 px-margin-mobile md:px-margin-desktop py-section-gap-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 px-margin-mobile md:px-margin-desktop py-section-gap-mobile md:py-section-gap-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter">
 <div class="md:col-span-4 flex flex-col gap-unit-md">
 <span class="font-display-lg text-headline-md"><span class="text-on-surface">Base</span><span class="text-secondary">Code</span></span>
 <p class="font-body-md text-on-surface-variant max-w-xs">Agencia de ingeniería web de alto rendimiento. Construimos productos digitales que definen industrias.</p>
@@ -738,7 +754,7 @@
 <!-- Payment Method Modal -->
 <div class="fixed inset-0 z-[200] hidden items-center justify-center p-margin-mobile" id="payment-modal">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closePaymentModal()"></div>
-<div class="glass-card rounded-2xl max-w-md w-full p-unit-lg relative z-10">
+<div class="glass-card rounded-2xl max-w-md w-full min-w-0 max-h-[85vh] overflow-y-auto p-unit-lg relative z-10">
 <button aria-label="Cerrar" class="absolute top-4 right-4 text-on-surface-variant hover:text-secondary transition-colors" onclick="closePaymentModal()">
 <span class="material-symbols-outlined">close</span>
 </button>
@@ -753,6 +769,29 @@
 </div>
 </div>
 <script>
+        // Mobile menu toggle
+        (function () {
+            const toggleBtn = document.getElementById('mobile-menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (!toggleBtn || !menu) return;
+
+            function closeMenu() {
+                menu.classList.add('hidden');
+                icon.textContent = 'menu';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = menu.classList.contains('hidden');
+                menu.classList.toggle('hidden');
+                icon.textContent = isHidden ? 'close' : 'menu';
+            });
+
+            menu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', closeMenu);
+            });
+        })();
+
         // Micro-interaction for Sticky Header background opacity on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
