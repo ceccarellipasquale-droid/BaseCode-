@@ -886,11 +886,11 @@
         };
 
         const paymentPlans = {
-            esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 600 },
-            avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 720 },
-            mensual: { name: 'Mantenimiento Mensual', price: 'S/ 150 / mes', methods: ['bank', 'interbank', 'yape'] },
-            semestral: { name: 'Mantenimiento Semestral', price: 'S/ 720 cada 6 meses', methods: ['bank', 'interbank', 'card'], cardAmount: 720 },
-            anual: { name: 'Mantenimiento Anual', price: 'S/ 1,200 al año', methods: ['bank', 'interbank', 'card'], cardAmount: 1200 }
+            esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 600, cardLink: 'https://mpago.la/2TudRaf' },
+            avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 720, cardLink: 'https://mpago.la/2vxFw8q' },
+            mensual: { name: 'Mantenimiento Mensual', price: 'S/ 150 / mes', methods: ['bank', 'interbank', 'yape', 'card'], cardAmount: 150, cardLink: 'https://mpago.la/1tuqVZv' },
+            semestral: { name: 'Mantenimiento Semestral', price: 'S/ 720 cada 6 meses', methods: ['bank', 'interbank', 'card'], cardAmount: 720, cardLink: 'https://mpago.la/1h8K3VL' },
+            anual: { name: 'Mantenimiento Anual', price: 'S/ 1,200 al año', methods: ['bank', 'interbank', 'card'], cardAmount: 1200, cardLink: 'https://mpago.la/2e3J4i5' }
         };
 
         function openPaymentModal(planKey) {
@@ -905,14 +905,14 @@
 
                 if (key === 'card') {
                     return `
-                        <button class="w-full flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low hover:border-secondary transition-colors text-left" id="payment-card-btn" type="button">
+                        <a class="flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low hover:border-secondary transition-colors" href="${plan.cardLink}" rel="noopener noreferrer" target="_blank">
                             <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">${m.icon}</div>
                             <div>
                                 <p class="font-label-sm text-label-sm text-on-surface">${m.label}</p>
-                                <p class="font-body-md text-xs text-on-surface-variant" id="payment-card-status">Pago seguro de S/ ${plan.cardAmount} vía MercadoPago</p>
+                                <p class="font-body-md text-xs text-on-surface-variant">Pago seguro de S/ ${plan.cardAmount} vía MercadoPago</p>
                             </div>
-                            <span class="material-symbols-outlined text-on-surface-variant ml-auto">arrow_forward</span>
-                        </button>
+                            <span class="material-symbols-outlined text-on-surface-variant ml-auto">open_in_new</span>
+                        </a>
                     `;
                 }
 
@@ -926,11 +926,6 @@
                     </div>
                 `;
             }).join('');
-
-            const cardBtn = document.getElementById('payment-card-btn');
-            if (cardBtn) {
-                cardBtn.addEventListener('click', () => handleCardPayment(planKey, cardBtn));
-            }
 
             const whatsappMessage = `Hola, quiero contratar el ${plan.name} (${plan.price}).`;
             document.getElementById('payment-modal-whatsapp').href = `https://wa.me/51934676211?text=${encodeURIComponent(whatsappMessage)}`;
