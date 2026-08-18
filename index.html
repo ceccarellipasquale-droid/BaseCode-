@@ -885,8 +885,6 @@
             }
         };
 
-        const MERCADOPAGO_LINK = 'https://link.mercadopago.com.pe/basecode';
-
         const paymentPlans = {
             esencial: { name: 'Plan Esencial', price: 'S/ 1,500 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 600 },
             avanzado: { name: 'Plan Avanzado', price: 'S/ 1,800 · pago único', methods: ['bank', 'interbank', 'card'], cardAmount: 720 },
@@ -906,16 +904,15 @@
                 const m = paymentMethodsInfo[key];
 
                 if (key === 'card') {
-                    const sub = `Ingresa S/ ${plan.cardAmount} en la página de MercadoPago`;
                     return `
-                        <a class="flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low hover:border-secondary transition-colors" href="${MERCADOPAGO_LINK}" rel="noopener noreferrer" target="_blank">
+                        <button class="w-full flex items-center gap-4 p-3 rounded-lg border border-outline-variant/30 bg-surface-container-low hover:border-secondary transition-colors text-left" id="payment-card-btn" type="button">
                             <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">${m.icon}</div>
                             <div>
                                 <p class="font-label-sm text-label-sm text-on-surface">${m.label}</p>
-                                <p class="font-body-md text-xs text-on-surface-variant">${sub}</p>
+                                <p class="font-body-md text-xs text-on-surface-variant" id="payment-card-status">Pago seguro de S/ ${plan.cardAmount} vía MercadoPago</p>
                             </div>
-                            <span class="material-symbols-outlined text-on-surface-variant ml-auto">open_in_new</span>
-                        </a>
+                            <span class="material-symbols-outlined text-on-surface-variant ml-auto">arrow_forward</span>
+                        </button>
                     `;
                 }
 
@@ -930,6 +927,11 @@
                 `;
             }).join('');
 
+            const cardBtn = document.getElementById('payment-card-btn');
+            if (cardBtn) {
+                cardBtn.addEventListener('click', () => handleCardPayment(planKey, cardBtn));
+            }
+
             const whatsappMessage = `Hola, quiero contratar el ${plan.name} (${plan.price}).`;
             document.getElementById('payment-modal-whatsapp').href = `https://wa.me/51934676211?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -942,6 +944,35 @@
             const modal = document.getElementById('payment-modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+        }
+
+        async function handleCardPayment(planKey, buttonEl) {
+            const statusEl = document.getElementById('payment-card-status');
+            const originalText = statusEl.textContent;
+            statusEl.textContent = 'Generando link seguro...';
+            buttonEl.disabled = true;
+
+            try {
+                const res = await fetch('/api/create-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ planKey }),
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.checkoutUrl) {
+                    statusEl.textContent = data.error || 'No se pudo generar el link. Probá otro método.';
+                    buttonEl.disabled = false;
+                    return;
+                }
+
+                window.open(data.checkoutUrl, '_blank', 'noopener,noreferrer');
+                statusEl.textContent = originalText;
+                buttonEl.disabled = false;
+            } catch (err) {
+                statusEl.textContent = 'Error de conexión. Probá otro método.';
+                buttonEl.disabled = false;
+            }
         }
 
         // Contact form: se envía por WhatsApp. El correo (mailto) queda disponible como
