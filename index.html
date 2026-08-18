@@ -430,6 +430,42 @@
 <button aria-label="Reseña 5" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="4"></button>
 <button aria-label="Reseña 6" class="w-2.5 h-2.5 rounded-full bg-outline-variant transition-colors" data-dot="5"></button>
 </div>
+
+<!-- Leave a comment -->
+<div class="max-w-2xl mx-auto mt-section-gap-mobile glass-card rounded-2xl p-unit-lg">
+<h3 class="font-headline-md text-lg text-on-surface mb-1">¿Ya trabajaste con nosotros?</h3>
+<p class="font-body-md text-sm text-on-surface-variant mb-unit-md">Contanos cómo te fue. Revisamos cada comentario antes de publicarlo.</p>
+<form class="flex flex-col gap-unit-md" id="review-form">
+<div class="grid md:grid-cols-2 gap-unit-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Nombre</label>
+<input class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="review-name" placeholder="Tu nombre" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Empresa / Cargo (opcional)</label>
+<input class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="review-company" placeholder="Ej. Dueño de Panadería Don Luis" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Tu calificación</label>
+<div class="flex gap-1" id="review-stars">
+<button aria-label="1 estrella" class="review-star text-outline-variant hover:text-secondary transition-colors" data-star="1" type="button"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button aria-label="2 estrellas" class="review-star text-outline-variant hover:text-secondary transition-colors" data-star="2" type="button"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button aria-label="3 estrellas" class="review-star text-outline-variant hover:text-secondary transition-colors" data-star="3" type="button"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button aria-label="4 estrellas" class="review-star text-outline-variant hover:text-secondary transition-colors" data-star="4" type="button"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button aria-label="5 estrellas" class="review-star text-outline-variant hover:text-secondary transition-colors" data-star="5" type="button"><span class="material-symbols-outlined text-3xl">star</span></button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-xs text-on-surface-variant uppercase">Tu comentario</label>
+<textarea class="bg-surface-container-low border-outline-variant/30 rounded-lg focus:border-secondary focus:ring-0 text-on-surface" id="review-message" placeholder="Contanos tu experiencia con BaseCode..." required="" rows="3"></textarea>
+</div>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity" type="submit">
+                        Enviar comentario
+                    </button>
+<p class="font-label-xs text-label-xs text-secondary hidden" id="review-confirmation">¡Gracias! Se abrió WhatsApp con tu comentario — lo vamos a revisar y publicar pronto.</p>
+</form>
+</div>
 </div>
 </section>
 <!-- Section 9: Pricing -->
@@ -994,6 +1030,46 @@
                 contactForm.reset();
             });
         }
+
+        // Formulario de reseñas: selección de estrellas + envío por WhatsApp para revisión.
+        (function () {
+            const stars = document.querySelectorAll('.review-star');
+            let selectedRating = 0;
+
+            function paintStars(rating) {
+                stars.forEach((star) => {
+                    const value = Number(star.dataset.star);
+                    star.classList.toggle('text-secondary', value <= rating);
+                    star.classList.toggle('text-outline-variant', value > rating);
+                });
+            }
+
+            stars.forEach((star) => {
+                star.addEventListener('click', () => {
+                    selectedRating = Number(star.dataset.star);
+                    paintStars(selectedRating);
+                });
+            });
+
+            const reviewForm = document.getElementById('review-form');
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('review-name').value.trim();
+                    const company = document.getElementById('review-company').value.trim();
+                    const message = document.getElementById('review-message').value.trim();
+                    const ratingText = selectedRating > 0 ? `${selectedRating}/5 estrellas` : 'Sin calificación';
+
+                    const text = `Hola, quiero dejar un comentario sobre BaseCode.\nNombre: ${name}${company ? `\nEmpresa/Cargo: ${company}` : ''}\nCalificación: ${ratingText}\n\n"${message}"`;
+                    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+
+                    document.getElementById('review-confirmation').classList.remove('hidden');
+                    reviewForm.reset();
+                    selectedRating = 0;
+                    paintStars(0);
+                });
+            }
+        })();
 
         // Newsletter: por ahora también confirma la suscripción por WhatsApp.
         const newsletterButton = document.getElementById('newsletter-submit');
