@@ -4,8 +4,9 @@
 // (Vercel) y solo devuelve la URL de checkout ya lista.
 
 const PLAN_PRICES = {
-  esencial: { title: 'BaseCode - Plan Esencial (Adelanto 40%)', amount: 600 },
-  avanzado: { title: 'BaseCode - Plan Avanzado (Adelanto 40%)', amount: 720 },
+  esencial: { title: 'BaseCode - Plan Esencial (Adelanto 40%)', amount: 520 },
+  profesional: { title: 'BaseCode - Plan Profesional (Adelanto 40%)', amount: 720 },
+  avanzado: { title: 'BaseCode - Plan Avanzado (Adelanto 40%)', amount: 840 },
   mensual: { title: 'BaseCode - Mantenimiento Mensual', amount: 150 },
   semestral: { title: 'BaseCode - Mantenimiento Semestral', amount: 720 },
   anual: { title: 'BaseCode - Mantenimiento Anual', amount: 1200 },
