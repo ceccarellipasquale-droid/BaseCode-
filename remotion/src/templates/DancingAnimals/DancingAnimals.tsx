@@ -36,11 +36,16 @@ const CONFETTI = Array.from({ length: 16 }, (_, i) => ({
 /**
  * Plantilla "Animales bailando salsa".
  *
- * No es video generado por IA: son formas simples animadas por código
- * (ver DancingAnimal.tsx). El "baile" es 100% función de `theta`, un
- * ángulo que avanza con `useCyclicProgress` — la misma utilidad que usa
- * la plantilla de bucle infinito (ver src/lib/loop.ts) — así que, gratis,
- * el video entero (piso, luces, animales) vuelve exactamente a su estado
+ * No es video generado por IA ni fotorrealista (no tengo esa herramienta
+ * disponible acá): son formas simples animadas por código (ver
+ * DancingAnimal.tsx). Lo que sí es real es la coreografía: `count` avanza
+ * de 0 a 8 -los "counts" de un compás de baile- siguiendo el paso básico
+ * lateral de salsa (1-2-3, pausa-4, 5-6-7, pausa-8; ver el comentario
+ * largo en DancingAnimal.tsx), en vez de un vaivén senoidal genérico.
+ *
+ * `count` sale de `useCyclicProgress` — la misma utilidad que usa la
+ * plantilla de bucle infinito (ver src/lib/loop.ts) — así que, gratis, el
+ * video entero (piso, luces, animales) vuelve exactamente a su estado
  * inicial en el último frame y el loop no se nota al repetirse.
  */
 export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
@@ -55,7 +60,13 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
 
+  // beatProgress: 0..1 exacto por vuelta (loop-safe). Cada vuelta completa
+  // es UN compás de 8 counts del paso básico de salsa.
   const beatProgress = useCyclicProgress(frame, durationInFrames, danceCycles);
+  const count = beatProgress * 8; // 0..8 -> ver HIP_KEYFRAMES en DancingAnimal.tsx
+  // Ángulo auxiliar (misma progresión, en radianes) para las decoraciones
+  // ambiente (confeti, pulso de cámara), que no necesitan seguir el
+  // conteo exacto del paso, solo moverse suave y en loop.
   const theta = beatProgress * Math.PI * 2;
   // Giro lento del reflector, con su propio ciclo entero -> también cierra
   // el loop exacto (ver useCyclicProgress).
@@ -64,7 +75,7 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
   // Pulso de cámara sutil al ritmo del baile: función de `theta`, así que
   // también respeta el bucle exacto (nunca reduce por debajo de 1x, para
   // no dejar ver el fondo por fuera del AbsoluteFill recortado).
-  const cameraScale = 1 + Math.abs(Math.sin(theta)) * 0.018;
+  const cameraScale = 1 + Math.abs(Math.sin(theta * 4)) * 0.018;
 
   const slotWidth = 1080 / animals.length;
 
@@ -143,13 +154,17 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
           }}
         />
 
-        {/* Animales, uno por "carril" horizontal */}
+        {/* Animales, uno por "carril" horizontal. alignItems:"flex-end"
+            para que todos apoyen los pies en la misma línea de piso, sin
+            importar que alguno (la jirafa, por su cuello largo) sea
+            bastante más alto que el resto. */}
         <AbsoluteFill
           style={{ alignItems: "flex-end", justifyContent: "center" }}
         >
           <div
             style={{
               display: "flex",
+              alignItems: "flex-end",
               width: "100%",
               justifyContent: "center",
               marginBottom: 320,
@@ -157,15 +172,18 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
           >
             {animals.map((animal, i) => {
               // Pequeño corrimiento de fase por animal: bailan juntos pero
-              // no clonados. Es una CONSTANTE sumada a theta, así que no
-              // rompe la exactitud del loop (ver DancingAnimal.tsx).
-              const phaseOffset = i * 0.6;
+              // no clonados. Es una CONSTANTE sumada a `count`, envuelta
+              // en el mismo rango 0-8, así que no rompe la exactitud del
+              // loop (ver DancingAnimal.tsx).
+              const phaseOffset = i * 0.5;
+              const animalCount = (count + phaseOffset) % 8;
               return (
                 <div
                   key={i}
                   style={{
                     width: slotWidth,
                     display: "flex",
+                    alignItems: "flex-end",
                     justifyContent: "center",
                   }}
                 >
@@ -173,7 +191,7 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
                     species={animal.species}
                     bodyColor={animal.bodyColor}
                     accentColor={animal.accentColor}
-                    theta={theta + phaseOffset}
+                    count={animalCount}
                     scale={1.5}
                   />
                 </div>
