@@ -14,6 +14,25 @@ import type { DancingAnimalsProps } from "./schema";
 const resolveSrc = (src: string) =>
   src.startsWith("/") ? staticFile(src) : src;
 
+const CONFETTI_COLORS = ["#ffd23f", "#ff2fb0", "#00dce5", "#ff8a3d"];
+
+/**
+ * Posiciones/colores de las partículas de confeti, calculadas UNA vez
+ * (no en cada render) a partir de un patrón determinístico (proporción
+ * áurea) en vez de Math.random(): así el resultado es siempre el mismo
+ * entre renders — importante porque el render por lotes puede pintar
+ * cuadros de un mismo video en pestañas/procesos distintos en paralelo
+ * (ver scripts/render-batch.ts), y necesitan coincidir cuadro a cuadro.
+ */
+const CONFETTI = Array.from({ length: 16 }, (_, i) => ({
+  x: ((i * 0.618033988749895 + i * 0.13) % 1) * 1080,
+  y: 260 + ((i * 233) % 1500),
+  size: 6 + (i % 4) * 3,
+  speed: 0.6 + (i % 3) * 0.35,
+  phase: i * 0.9,
+  color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+}));
+
 /**
  * Plantilla "Animales bailando salsa".
  *
@@ -42,6 +61,10 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
   // el loop exacto (ver useCyclicProgress).
   const spotlightAngle =
     useCyclicProgress(frame, durationInFrames, 1) * 360;
+  // Pulso de cámara sutil al ritmo del baile: función de `theta`, así que
+  // también respeta el bucle exacto (nunca reduce por debajo de 1x, para
+  // no dejar ver el fondo por fuera del AbsoluteFill recortado).
+  const cameraScale = 1 + Math.abs(Math.sin(theta)) * 0.018;
 
   const slotWidth = 1080 / animals.length;
 
@@ -87,53 +110,86 @@ export const DancingAnimals: React.FC<DancingAnimalsProps> = ({
         </div>
       ) : null}
 
-      {/* Piso de baile */}
+      {/* Confeti: brillitos que flotan, todo derivado de `theta` (loop-safe). */}
+      {CONFETTI.map((c, i) => {
+        const bob = Math.sin(theta * c.speed + c.phase) * 22;
+        const drift = Math.cos(theta * c.speed * 0.6 + c.phase) * 14;
+        const twinkle = 0.35 + 0.55 * Math.abs(Math.sin(theta * c.speed + c.phase));
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: c.x + drift,
+              top: c.y + bob,
+              width: c.size,
+              height: c.size,
+              borderRadius: "50%",
+              backgroundColor: c.color,
+              opacity: twinkle,
+            }}
+          />
+        );
+      })}
+
+      {/* Escenario (piso + animales): pulsa levemente al ritmo del baile. */}
+      <AbsoluteFill style={{ transform: `scale(${cameraScale})` }}>
+        {/* Piso de baile */}
+        <AbsoluteFill
+          style={{
+            top: "auto",
+            height: 760,
+            background: `linear-gradient(180deg, transparent 0%, ${floorColor} 55%)`,
+          }}
+        />
+
+        {/* Animales, uno por "carril" horizontal */}
+        <AbsoluteFill
+          style={{ alignItems: "flex-end", justifyContent: "center" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              marginBottom: 320,
+            }}
+          >
+            {animals.map((animal, i) => {
+              // Pequeño corrimiento de fase por animal: bailan juntos pero
+              // no clonados. Es una CONSTANTE sumada a theta, así que no
+              // rompe la exactitud del loop (ver DancingAnimal.tsx).
+              const phaseOffset = i * 0.6;
+              return (
+                <div
+                  key={i}
+                  style={{
+                    width: slotWidth,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <DancingAnimal
+                    species={animal.species}
+                    bodyColor={animal.bodyColor}
+                    accentColor={animal.accentColor}
+                    theta={theta + phaseOffset}
+                    scale={1.5}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </AbsoluteFill>
+      </AbsoluteFill>
+
+      {/* Viñeta: oscurece las esquinas para dar look "cinematográfico". */}
       <AbsoluteFill
         style={{
-          top: "auto",
-          height: 760,
-          background: `linear-gradient(180deg, transparent 0%, ${floorColor} 55%)`,
+          background:
+            "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%)",
         }}
       />
-
-      {/* Animales, uno por "carril" horizontal */}
-      <AbsoluteFill
-        style={{ alignItems: "flex-end", justifyContent: "center" }}
-      >
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "center",
-            marginBottom: 320,
-          }}
-        >
-          {animals.map((animal, i) => {
-            // Pequeño corrimiento de fase por animal: bailan juntos pero
-            // no clonados. Es una CONSTANTE sumada a theta, así que no
-            // rompe la exactitud del loop (ver DancingAnimal.tsx).
-            const phaseOffset = i * 0.6;
-            return (
-              <div
-                key={i}
-                style={{
-                  width: slotWidth,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <DancingAnimal
-                  species={animal.species}
-                  bodyColor={animal.bodyColor}
-                  accentColor={animal.accentColor}
-                  theta={theta + phaseOffset}
-                  scale={1.5}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </AbsoluteFill>
 
       {audioSrc ? <Audio src={resolveSrc(audioSrc)} /> : null}
     </AbsoluteFill>

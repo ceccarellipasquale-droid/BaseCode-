@@ -59,6 +59,9 @@ npx remotion render infinite-loop out/mi-video.mp4 --props=./mis-props.json
    el schema de esa plantilla — ver `src/templates/<Plantilla>/schema.ts`).
 2. Colocá las imágenes/audios que referencies en `public/images` o
    `public/audio`, y apuntalos desde el JSON como `"/images/archivo.jpg"`.
+   Si el audio no es tuyo, revisá su licencia — ver
+   `public/audio/CREDITS.md` para el caso de la pista de salsa incluida
+   (CC BY 4.0: hay que dar crédito al autor al publicar).
 3. Corré:
 
 ```bash

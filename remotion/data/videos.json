@@ -53,8 +53,9 @@
     "outputName": "animales-bailando-salsa",
     "props": {
       "title": "¡A bailar salsa! 💃🕺",
-      "durationInSeconds": 8,
-      "danceCycles": 6,
+      "durationInSeconds": 10,
+      "danceCycles": 9,
+      "audioSrc": "/audio/salsa-instrumental-loop.mp3",
       "animals": [
         { "species": "fox" },
         { "species": "cat" },

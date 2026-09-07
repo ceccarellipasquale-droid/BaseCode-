@@ -31,6 +31,15 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
   const body = bodyColor ?? config.bodyColor;
   const accent = accentColor ?? config.accentColor;
 
+  /**
+   * Sombreado con volumen: un degradé radial que aclara la esquina
+   * superior (simulando una luz de escena) y oscurece hacia el borde.
+   * `color-mix()` es soportado por el Chrome que usa Remotion para
+   * renderizar, así que no hace falta calcular el mezclado a mano.
+   */
+  const shaded = (color: string) =>
+    `radial-gradient(circle at 32% 26%, color-mix(in srgb, ${color} 60%, white) 0%, ${color} 55%, color-mix(in srgb, ${color} 80%, black) 100%)`;
+
   const hipSway = Math.sin(theta) * 12; // grados
   const sideStep = Math.sin(theta) * 22; // px
   const bounce = Math.abs(Math.sin(theta)) * 16; // px, hacia arriba
@@ -42,16 +51,34 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
   const tailSway = Math.sin(theta + Math.PI) * 20; // opuesto a la cadera
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: 220,
-        height: 320,
-        // Traslado primero y escala después: así el paso lateral/rebote
-        // se mide siempre en los mismos px, sin importar `scale`.
-        transform: `translateX(${sideStep}px) translateY(${-bounce}px) scale(${scale})`,
-      }}
-    >
+    <div style={{ position: "relative", width: 220, height: 320 }}>
+      {/* Sombra de contacto: sigue el paso lateral pero NO el salto, así
+          se queda "pegada" al piso y se achica/aclara cuando el personaje
+          rebota hacia arriba — vende mucho mejor la sensación de peso. */}
+      <div
+        style={{
+          position: "absolute",
+          left: 40,
+          top: 300,
+          width: 140,
+          height: 30,
+          borderRadius: "50%",
+          backgroundColor: "#000000",
+          filter: "blur(6px)",
+          opacity: 0.35 - (bounce / 16) * 0.22,
+          transform: `translateX(${sideStep}px) scale(${scale * (1 - bounce / 60)})`,
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          // Traslado primero y escala después: así el paso lateral/rebote
+          // se mide siempre en los mismos px, sin importar `scale`.
+          transform: `translateX(${sideStep}px) translateY(${-bounce}px) scale(${scale})`,
+        }}
+      >
       {/* Cola */}
       {config.hasTail ? (
         <div
@@ -62,7 +89,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
             width: 70,
             height: 30,
             borderRadius: 20,
-            backgroundColor: body,
+            background: shaded(body),
             transformOrigin: "right center",
             transform: `rotate(${40 + tailSway}deg)`,
             zIndex: 0,
@@ -79,7 +106,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
           width: 38,
           height: 78,
           borderRadius: 20,
-          backgroundColor: body,
+          background: shaded(body),
           transformOrigin: "top center",
           transform: `rotate(${-hipSway * 0.6}deg)`,
         }}
@@ -105,7 +132,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
           width: 38,
           height: 78,
           borderRadius: 20,
-          backgroundColor: body,
+          background: shaded(body),
           transformOrigin: "top center",
           transform: `rotate(${hipSway * 0.6}deg)`,
         }}
@@ -134,7 +161,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
           width: 26,
           height: 92,
           borderRadius: 14,
-          backgroundColor: body,
+          background: shaded(body),
           transformOrigin: "top center",
           transform: `rotate(${armLeft}deg)`,
         }}
@@ -160,7 +187,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
           width: 26,
           height: 92,
           borderRadius: 14,
-          backgroundColor: body,
+          background: shaded(body),
           transformOrigin: "top center",
           transform: `rotate(${armRight}deg)`,
         }}
@@ -199,7 +226,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
             width: 120,
             height: 150,
             borderRadius: "60px 60px 50px 50px",
-            backgroundColor: body,
+            background: shaded(body),
           }}
         />
         {/* Panza / pechera */}
@@ -269,7 +296,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
                   width: 44,
                   height: 44,
                   borderRadius: "50%",
-                  backgroundColor: body,
+                  background: shaded(body),
                 }}
               />
               <div
@@ -280,7 +307,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
                   width: 44,
                   height: 44,
                   borderRadius: "50%",
-                  backgroundColor: body,
+                  background: shaded(body),
                 }}
               />
             </>
@@ -296,7 +323,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
                   width: 30,
                   height: 62,
                   borderRadius: "50% 50% 50% 50% / 40% 40% 60% 60%",
-                  backgroundColor: body,
+                  background: shaded(body),
                   transformOrigin: "top center",
                   transform: `rotate(${-10 + hipSway * 0.5}deg)`,
                 }}
@@ -309,7 +336,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
                   width: 30,
                   height: 62,
                   borderRadius: "50% 50% 50% 50% / 40% 40% 60% 60%",
-                  backgroundColor: body,
+                  background: shaded(body),
                   transformOrigin: "top center",
                   transform: `rotate(${10 - hipSway * 0.5}deg)`,
                 }}
@@ -323,7 +350,7 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
               position: "absolute",
               inset: 0,
               borderRadius: "50%",
-              backgroundColor: body,
+              background: shaded(body),
             }}
           />
 
@@ -354,7 +381,33 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
             />
           )}
 
-          {/* Ojos */}
+          {/* Cachetes (dan calidez/expresividad) */}
+          <div
+            style={{
+              position: "absolute",
+              left: 8,
+              top: 52,
+              width: 20,
+              height: 14,
+              borderRadius: "50%",
+              backgroundColor: "#ff6f91",
+              opacity: 0.35,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              right: 8,
+              top: 52,
+              width: 20,
+              height: 14,
+              borderRadius: "50%",
+              backgroundColor: "#ff6f91",
+              opacity: 0.35,
+            }}
+          />
+
+          {/* Ojos, con un brillito para que no queden "muertos" */}
           <div
             style={{
               position: "absolute",
@@ -365,7 +418,19 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
               borderRadius: "50%",
               backgroundColor: "#1c1b1c",
             }}
-          />
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 1,
+                top: 1,
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                backgroundColor: "#ffffff",
+              }}
+            />
+          </div>
           <div
             style={{
               position: "absolute",
@@ -376,8 +441,21 @@ export const DancingAnimal: React.FC<DancingAnimalProps> = ({
               borderRadius: "50%",
               backgroundColor: "#1c1b1c",
             }}
-          />
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 1,
+                top: 1,
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                backgroundColor: "#ffffff",
+              }}
+            />
+          </div>
         </div>
+      </div>
       </div>
     </div>
   );
