@@ -74,7 +74,11 @@ const validateEntries = (entries: VideoEntry[]): ValidatedEntry[] => {
     validated.push({
       entry,
       fileName: outputFileName(entry, index),
-      props: result.data,
+      // El registro tipa `schema` como z.ZodTypeAny (para poder guardar
+      // plantillas con props distintas en el mismo objeto — ver
+      // src/templates/index.ts), así que acá se pierde el tipo concreto.
+      // En runtime siempre es el objeto de props validado.
+      props: result.data as Record<string, unknown>,
     });
   });
 

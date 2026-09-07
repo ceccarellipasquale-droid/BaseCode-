@@ -20,6 +20,7 @@ remotion/
 │   │   └── transitions.tsx        # Transiciones reutilizables entre escenas
 │   ├── templates/
 │   │   ├── InfiniteLoop/      # Plantilla "Bucle infinito"
+│   │   ├── DancingAnimals/    # Plantilla "Animales bailando salsa" (formas animadas, no IA)
 │   │   └── index.ts           # Registro de plantillas (agregar una nueva = una línea acá)
 │   ├── data/schema.ts          # Validación (Zod) de data/videos.json
 │   └── Root.tsx                # Registra una <Composition> por plantilla
@@ -39,7 +40,7 @@ se nota el corte entre el último y el primer cuadro.
 
 ## Renderizar UN video suelto
 
-Usando el `id` de una composición (hoy: `infinite-loop`) y props en JSON:
+Usando el `id` de una composición (hoy: `infinite-loop` o `dancing-animals`) y props en JSON:
 
 ```bash
 npx remotion render infinite-loop out/mi-video.mp4 --props='{"title":"Hola","subtitle":"Un subtítulo"}'

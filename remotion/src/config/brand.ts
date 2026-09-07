@@ -25,8 +25,19 @@ const FONT_FAMILIES = {
   mono: "JetBrains Mono",
 } as const;
 
-/** Registra la carga de una fuente local y bloquea el render hasta que esté lista. */
+/**
+ * Registra la carga de una fuente local y bloquea el render hasta que
+ * esté lista. `brand.ts` se importa también en contextos que evalúan el
+ * módulo fuera de una pestaña de navegador real (p. ej. el paso previo de
+ * @remotion/renderer que enumera las composiciones), donde no existe la
+ * Font Loading API del navegador (`FontFace`). En esos casos no hay nada
+ * que cargar: se sale sin registrar el `delayRender`.
+ */
 const loadLocalFont = (family: string, fileName: string, weight = "100 900") => {
+  if (typeof FontFace === "undefined") {
+    return;
+  }
+
   const handle = delayRender(`Cargando fuente ${family}`);
   loadFont({
     family,

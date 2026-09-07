@@ -46,5 +46,20 @@
       "secondaryColor": "#8bff6b",
       "textColor": "#f5f4ef"
     }
+  },
+  {
+    "id": "animales-bailando-salsa",
+    "template": "dancing-animals",
+    "outputName": "animales-bailando-salsa",
+    "props": {
+      "title": "¡A bailar salsa! 💃🕺",
+      "durationInSeconds": 8,
+      "danceCycles": 6,
+      "animals": [
+        { "species": "fox" },
+        { "species": "cat" },
+        { "species": "duck" }
+      ]
+    }
   }
 ]
