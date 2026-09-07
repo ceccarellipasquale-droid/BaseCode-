@@ -1,0 +1,35 @@
+{
+  "media_dir": "input_media",
+  "output_name": "glowritual_video_1.mp4",
+  "brand_text": "@glowritual",
+  "hook_text": "Esto le hizo esto a mi piel en 14 días 👇",
+  "music_file": "music/tu_pista.mp3",
+  "music_volume": 0.35,
+  "scenes": [
+    {
+      "file": "foto_producto_1.jpg",
+      "duration": 3.0,
+      "text": "Así llegó mi GlowRitual Mask ✨"
+    },
+    {
+      "file": "foto_uso_1.jpg",
+      "duration": 4.0,
+      "text": "10 minutos al día, en tu sofá"
+    },
+    {
+      "file": "foto_luz_roja.jpg",
+      "duration": 3.5,
+      "text": "Luz roja = colágeno + menos rojeces"
+    },
+    {
+      "file": "foto_antes_despues.jpg",
+      "duration": 4.0,
+      "text": "Después de 2 semanas 😳"
+    },
+    {
+      "file": "foto_empaque.jpg",
+      "duration": 3.0,
+      "text": "Envío gratis + garantía 30 días"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+input_media/*
+!input_media/.gitkeep
+output/*
+!output/.gitkeep
+music/*
+!music/.gitkeep
+__pycache__/
+*.pyc
