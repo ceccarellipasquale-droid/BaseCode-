@@ -1,0 +1,66 @@
+[
+  {
+    "id": "bienvenida-basecode",
+    "template": "infinite-loop",
+    "outputName": "bienvenida-basecode",
+    "props": {
+      "title": "Creamos tu sitio web",
+      "subtitle": "Diseño y desarrollo a medida para tu marca",
+      "label": "BASECODE",
+      "durationInSeconds": 6,
+      "transitionInSeconds": 0.6
+    }
+  },
+  {
+    "id": "producto-con-logo-y-subtitulos",
+    "template": "infinite-loop",
+    "outputName": "producto-con-logo-y-subtitulos",
+    "props": {
+      "title": "Lanzamos algo nuevo",
+      "subtitle": "Rápido, prolijo y sin vueltas",
+      "label": "NOVEDAD",
+      "imageSrc": "/images/placeholder-logo.svg",
+      "durationInSeconds": 8,
+      "transitionInSeconds": 0.6,
+      "words": [
+        { "text": "Rápido,", "start": 0.4, "end": 0.9 },
+        { "text": "prolijo", "start": 0.9, "end": 1.4 },
+        { "text": "y", "start": 1.4, "end": 1.5 },
+        { "text": "sin", "start": 1.5, "end": 1.7 },
+        { "text": "vueltas.", "start": 1.7, "end": 2.3 }
+      ]
+    }
+  },
+  {
+    "id": "promo-colores-alternativos",
+    "template": "infinite-loop",
+    "outputName": "promo-colores-alternativos",
+    "props": {
+      "title": "Tu promo acá",
+      "subtitle": "Este ejemplo usa una paleta distinta a la de marca",
+      "label": "PROMO",
+      "durationInSeconds": 6,
+      "backgroundColor": "#12130f",
+      "surfaceColor": "#1f2117",
+      "primaryColor": "#ffb400",
+      "secondaryColor": "#8bff6b",
+      "textColor": "#f5f4ef"
+    }
+  },
+  {
+    "id": "animales-bailando-salsa",
+    "template": "dancing-animals",
+    "outputName": "animales-bailando-salsa",
+    "props": {
+      "title": "¡A bailar salsa! 💃🕺",
+      "durationInSeconds": 8.7,
+      "danceCycles": 2,
+      "audioSrc": "/audio/salsa-instrumental-loop.mp3",
+      "animals": [
+        { "species": "giraffe" },
+        { "species": "lion" },
+        { "species": "zebra" }
+      ]
+    }
+  }
+]
