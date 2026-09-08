@@ -29,9 +29,34 @@ un **placeholder** y no debe salir a producción tal cual:
    ilustrativas. Actualízalas con tus números reales de ventas/inventario.
 5. **Enlaces**: redes sociales, política de privacidad y términos apuntan
    a `#` — conéctalos a tus páginas reales.
-6. **Countdown de la oferta**: hoy se reinicia cada 24h automáticamente
-   (para mantener la sensación de urgencia sin fecha fija). Si prefieres
-   una oferta con fecha de cierre real, dime y lo cambio a una fecha fija.
+6. **Formulario de "10% de descuento por tu correo"**: hoy solo guarda el
+   email en el `localStorage` del navegador de quien lo llena (sirve como
+   demo, pero no te llega a ti ni envía nada real). Conéctalo a un
+   proveedor real antes de lanzar — la forma más simple es crear un
+   formulario en Mailchimp/Klaviyo/MailerLite y reemplazar el `<form>`
+   por el embed que ellos te dan, o usar un Google Form como atajo rápido.
+
+## Cambios recientes (segunda revisión)
+
+- **Se quitó el countdown y el "quedan 23 unidades"**: un cronómetro que
+  se reinicia solo y una cifra de stock inventada son "dark patterns" de
+  urgencia falsa — además de no ser honesto, Meta/TikTok Ads suspenden
+  cuentas por esto, y es justo el tipo de práctica que la FTC ya está
+  sancionando. Se puede volver a agregar un countdown cuando tengas una
+  fecha de cierre de promo real, o un dato de stock real.
+- **Se quitó el badge "+2,400 clientas felices"**: no hay ventas reales
+  todavía — un número de reseñas inventado es lo primero que un comprador
+  desconfiado detecta. Agrégalo de vuelta con tu cifra real cuando la tengas.
+- **Se agregaron 3 planes de cantidad** (1 / 2 / 3 mascarillas) en la
+  sección de oferta, con el de 2 unidades destacado como "Más elegido".
+  Esto sube tu ticket promedio sin gastar más en publicidad — es la forma
+  más barata de acercarte más rápido a tu meta de ingresos.
+- **Se agregó una sección de captura de email** antes del footer, para no
+  perder a quienes visitan la página pero no compran en el momento (la
+  gran mayoría del tráfico). Ver nota de conexión a ESP arriba.
+- **Se agregaron señales de confianza** (pago encriptado, garantía, envío
+  gratis, métodos de pago) cerca de los botones de compra — importante
+  para una marca nueva sin reputación todavía.
 
 ## Cómo verla
 

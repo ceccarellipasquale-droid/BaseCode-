@@ -111,9 +111,12 @@
       <div class="flex flex-wrap items-center gap-x-6 gap-y-3 justify-center md:justify-start mt-8 text-sm text-ink/80">
         <span class="flex items-center gap-1.5">🚚 Envío gratis</span>
         <span class="flex items-center gap-1.5">🛡️ Garantía 30 días</span>
-        <span class="flex items-center gap-1.5">💛 +2,400 clientas felices</span>
+        <span class="flex items-center gap-1.5">🔒 Pago 100% seguro</span>
       </div>
-      <!-- NOTA: reemplaza "+2,400 clientas felices" por tu cifra real de ventas/reseñas antes de publicar -->
+      <!-- El badge "+2,400 clientas felices" se quitó a propósito: no hay ventas
+           reales todavía. Vuelve a agregarlo (con tu cifra real) apenas tengas
+           un número que puedas respaldar — un dato falso aquí es lo primero que
+           un comprador desconfiado detecta. -->
     </div>
 
     <div class="order-1 md:order-2 fade-in flex justify-center">
@@ -338,29 +341,96 @@
   </div>
 </section>
 
-<!-- ============ OFERTA / URGENCIA ============ -->
+<!-- ============ OFERTA (bundles de cantidad) ============ -->
+<!--
+  NOTA: el countdown y el "quedan X unidades" se quitaron a propósito.
+  Un cronómetro que se reinicia solo y una cifra de stock inventada son
+  "dark patterns" de urgencia falsa: además de no ser honestos con quien
+  compra, Meta y TikTok Ads suspenden cuentas por detectarlos, y es el
+  tipo de práctica que reguladores como la FTC ya están sancionando.
+  Cuando tengas fecha de cierre real de una promo, o inventario real que
+  se esté agotando, se puede volver a agregar mostrando el dato verdadero.
+-->
 <section id="oferta" class="py-16 md:py-24 bg-ink text-white relative overflow-hidden">
   <div class="absolute inset-0 opacity-20 glow-orb"></div>
-  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center relative fade-in">
-    <span class="inline-block text-xs tracking-[0.2em] uppercase text-gold mb-4">Oferta de lanzamiento</span>
+  <div class="max-w-4xl mx-auto px-5 md:px-8 text-center relative fade-in">
+    <span class="inline-block text-xs tracking-[0.2em] uppercase text-gold mb-4">Precio de lanzamiento</span>
     <h2 class="font-serif text-3xl md:text-4xl mb-4">Empieza tu ritual hoy</h2>
-    <p class="text-white/70 mb-8 max-w-md mx-auto">30% de descuento por tiempo limitado. Quedan pocas unidades de este lote.</p>
+    <p class="text-white/70 mb-12 max-w-md mx-auto">Elige tu ritual — comprar más de una te sale más barato por unidad.</p>
 
-    <div class="flex items-center justify-center gap-4 mb-8">
-      <span class="text-white/50 line-through text-lg">$79</span>
-      <span class="font-serif text-4xl text-gold">$49</span>
+    <div class="grid sm:grid-cols-3 gap-5 mb-10 text-left">
+      <div class="bg-white/5 border border-white/15 rounded-2xl p-6 flex flex-col">
+        <p class="text-sm text-white/60 mb-1">1 mascarilla</p>
+        <p class="font-serif text-3xl mb-1">$49</p>
+        <p class="text-xs text-white/40 mb-6">Antes <s>$79</s></p>
+        <a href="#" class="mt-auto text-center border border-white/30 rounded-full py-3 text-sm font-medium hover:bg-white/10 transition">
+          Comprar 1
+        </a>
+      </div>
+
+      <div class="relative bg-gold/10 border-2 border-gold rounded-2xl p-6 flex flex-col sm:-translate-y-3">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-ink text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full">
+          Más elegido
+        </span>
+        <p class="text-sm text-white/60 mb-1">2 mascarillas</p>
+        <p class="font-serif text-3xl mb-1">$85</p>
+        <p class="text-xs text-gold mb-6">Ahorras $13 · $42.50 c/u</p>
+        <a href="#" class="btn-gold mt-auto text-center rounded-full py-3 text-sm font-medium text-white">
+          Comprar 2
+        </a>
+      </div>
+
+      <div class="bg-white/5 border border-white/15 rounded-2xl p-6 flex flex-col">
+        <p class="text-sm text-white/60 mb-1">3 mascarillas</p>
+        <p class="font-serif text-3xl mb-1">$117</p>
+        <p class="text-xs text-white/40 mb-6">$39 c/u · ideal para regalar</p>
+        <a href="#" class="mt-auto text-center border border-white/30 rounded-full py-3 text-sm font-medium hover:bg-white/10 transition">
+          Comprar 3
+        </a>
+      </div>
     </div>
 
-    <div id="countdown" class="flex items-center justify-center gap-3 md:gap-5 mb-10">
-      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-h">00</div><div class="text-[10px] uppercase text-white/50">Horas</div></div>
-      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-m">00</div><div class="text-[10px] uppercase text-white/50">Min</div></div>
-      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-s">00</div><div class="text-[10px] uppercase text-white/50">Seg</div></div>
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/50 mb-3">
+      <span>🔒 Pago encriptado</span>
+      <span>🛡️ Garantía de devolución 30 días</span>
+      <span>🚚 Envío gratis en todos los planes</span>
     </div>
+    <div class="text-white/30 text-xs tracking-wide">
+      Visa · Mastercard · PayPal · Google Pay
+    </div>
+    <!-- Los iconos de pago son texto placeholder — cuando actives tu pasarela
+         de pago (Shopify Payments, Stripe, etc.), reemplázalos por los
+         logos reales que esa pasarela te habilita mostrar. -->
+  </div>
+</section>
 
-    <a href="#" class="btn-gold inline-block text-white font-medium px-10 py-4 rounded-full shadow-lg">
-      Comprar ahora — Stock limitado
-    </a>
-    <p class="text-xs text-white/40 mt-4">Quedan 23 unidades disponibles a este precio. <!-- Actualiza con tu stock real --></p>
+<!-- ============ CAPTURA DE EMAIL (para no perder tráfico que no compra hoy) ============ -->
+<!--
+  Este formulario hoy guarda el correo en localStorage del navegador de
+  quien lo llena (útil como demo, pero solo tú lo ves, y solo en ese
+  navegador). Para capturar correos de verdad conecta un proveedor real:
+  - Más simple: crea un formulario en Mailchimp/Klaviyo/MailerLite y
+    reemplaza el <form> de abajo por el embed que ellos te dan.
+  - Alternativa rápida sin cuenta de email marketing: usa un Google Form
+    y pon su URL en el "action" del form.
+-->
+<section class="py-16 md:py-20 bg-blush/30">
+  <div class="max-w-lg mx-auto px-5 md:px-8 text-center fade-in">
+    <h2 class="font-serif text-2xl md:text-3xl text-ink mb-3">¿Aún no decides? Llévate 10% de regalo</h2>
+    <p class="text-muted text-sm mb-6">Déjanos tu correo y te lo enviamos al instante — sin spam, solo tu ritual.</p>
+
+    <form id="email-capture-form" class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email" required placeholder="tu@correo.com" id="email-capture-input"
+        class="flex-1 px-5 py-3.5 rounded-full border border-blush-dark bg-white text-sm text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold"
+      >
+      <button type="submit" class="btn-gold text-white text-sm font-medium px-6 py-3.5 rounded-full shadow whitespace-nowrap">
+        Quiero mi 10%
+      </button>
+    </form>
+    <p id="email-capture-msg" class="text-sm text-gold-dark mt-4 hidden">
+      ¡Listo! Revisa tu correo — te llegará tu código en unos minutos.
+    </p>
   </div>
 </section>
 
@@ -425,30 +495,24 @@
     });
   });
 
-  // Countdown — reinicia cada 24h para mantener la sensación de urgencia
-  // (Cambia END_HOURS o fija una fecha real con Date si prefieres una oferta con fin real)
-  function startCountdown() {
-    const END_HOURS = 24;
-    let deadline = localStorage.getItem('glowritual_deadline');
-    const now = Date.now();
-    if (!deadline || Number(deadline) < now) {
-      deadline = now + END_HOURS * 60 * 60 * 1000;
-      localStorage.setItem('glowritual_deadline', deadline);
-    }
-    function tick() {
-      const diff = Math.max(0, Number(deadline) - Date.now());
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('cd-h').textContent = String(h).padStart(2, '0');
-      document.getElementById('cd-m').textContent = String(m).padStart(2, '0');
-      document.getElementById('cd-s').textContent = String(s).padStart(2, '0');
-      if (diff <= 0) { localStorage.removeItem('glowritual_deadline'); startCountdown(); }
-    }
-    tick();
-    setInterval(tick, 1000);
+  // Captura de email — placeholder funcional hasta conectar un ESP real
+  // (ver comentario HTML arriba del formulario para las opciones).
+  const emailForm = document.getElementById('email-capture-form');
+  if (emailForm) {
+    emailForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('email-capture-input');
+      const email = input.value.trim();
+      if (!email) return;
+      try {
+        const stored = JSON.parse(localStorage.getItem('glowritual_emails') || '[]');
+        stored.push({ email, ts: Date.now() });
+        localStorage.setItem('glowritual_emails', JSON.stringify(stored));
+      } catch (err) { /* localStorage no disponible; el mensaje de éxito igual se muestra */ }
+      document.getElementById('email-capture-msg').classList.remove('hidden');
+      emailForm.reset();
+    });
   }
-  startCountdown();
 </script>
 
 </body>
