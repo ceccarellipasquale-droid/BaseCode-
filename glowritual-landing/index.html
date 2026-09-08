@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlowRitual — Tu ritual de spa, en casa</title>
+<meta name="description" content="GlowRitual Mask: mascarilla LED de fototerapia facial. Piel más firme y luminosa en 14 días, 10 minutos al día desde tu sofá.">
+
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          blush: { DEFAULT: '#F5D9DE', dark: '#E9BFC7' },
+          cream: '#FBF7F4',
+          gold: { DEFAULT: '#C9A66B', dark: '#B08F52' },
+          lavender: { DEFAULT: '#B9A6D9', dark: '#9C87C4' },
+          ink: '#2E2333',
+          muted: '#7A6B7F',
+        },
+        fontFamily: {
+          serif: ['"Playfair Display"', 'serif'],
+          sans: ['"Poppins"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; background: #FBF7F4; color: #2E2333; }
+  h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+
+  .glow-orb {
+    background: radial-gradient(circle at 35% 30%, #ffffff 0%, #F5D9DE 22%, #E9BFC7 45%, #B9A6D9 75%, #9C87C4 100%);
+    box-shadow: 0 0 90px 20px rgba(185,166,217,0.45), 0 0 40px 8px rgba(245,217,222,0.6);
+  }
+  .glow-ring {
+    box-shadow: inset 0 0 40px 6px rgba(255,255,255,0.55);
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, #D8B784 0%, #C9A66B 55%, #B08F52 100%);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(201,166,107,0.4); }
+
+  .card-shadow { box-shadow: 0 10px 40px rgba(46,35,51,0.06); }
+
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .faq-item.open .faq-answer { max-height: 400px; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform .25s ease; }
+
+  .avatar {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 600; color: #fff;
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-40 bg-cream/90 backdrop-blur border-b border-blush/60">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="font-serif text-xl md:text-2xl tracking-wide text-ink flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-gold inline-block"></span>
+      GlowRitual
+    </a>
+    <a href="#oferta" class="hidden md:inline-flex btn-gold text-white text-sm font-medium px-5 py-2.5 rounded-full shadow">
+      Comprar ahora
+    </a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-12 items-center">
+
+    <div class="fade-in order-2 md:order-1 text-center md:text-left">
+      <span class="inline-block text-xs md:text-sm tracking-[0.2em] uppercase text-gold-dark font-semibold mb-4">
+        Ritual de fototerapia LED
+      </span>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight text-ink mb-5">
+        Tu ritual de spa,<br class="hidden md:block"> en casa, en 10 minutos
+      </h1>
+      <p class="text-muted text-base md:text-lg mb-8 max-w-md mx-auto md:mx-0">
+        Piel más firme y luminosa en 14 días. Luz roja y azul de uso profesional,
+        ahora desde tu sofá — sin citas, sin gastar en clínica.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+        <a href="#oferta" class="btn-gold text-white font-medium px-8 py-4 rounded-full shadow-lg w-full sm:w-auto text-center">
+          Comprar ahora
+        </a>
+        <span class="text-sm text-muted">Antes <s>$79</s> · Hoy $49</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-3 justify-center md:justify-start mt-8 text-sm text-ink/80">
+        <span class="flex items-center gap-1.5">🚚 Envío gratis</span>
+        <span class="flex items-center gap-1.5">🛡️ Garantía 30 días</span>
+        <span class="flex items-center gap-1.5">💛 +2,400 clientas felices</span>
+      </div>
+      <!-- NOTA: reemplaza "+2,400 clientas felices" por tu cifra real de ventas/reseñas antes de publicar -->
+    </div>
+
+    <div class="order-1 md:order-2 fade-in flex justify-center">
+      <div class="relative w-64 h-64 md:w-80 md:h-80">
+        <div class="absolute inset-0 rounded-full glow-orb glow-ring animate-pulse" style="animation-duration:4s;"></div>
+        <div class="absolute inset-6 rounded-full border border-white/60"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="font-serif text-white text-lg md:text-xl drop-shadow text-center px-6">
+            GlowRitual<br><span class="text-sm font-sans font-light tracking-wide">Mask</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- NOTA PARA EL DUEÑO DEL SITIO: este círculo con degradado es un placeholder visual.
+         En cuanto tengas fotos/render reales del producto, reemplaza este bloque por
+         una <img> o video del producto puesto y encendido. -->
+  </div>
+</section>
+
+<!-- ============ PROBLEMA / SOLUCIÓN ============ -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="text-center mb-14 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">¿Te reconoces en esto?</h2>
+      <p class="text-muted max-w-xl mx-auto">No es falta de cuidado — es que tu piel necesita algo más que crema.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-14">
+      <div class="fade-in bg-cream rounded-2xl p-6 md:p-8 card-shadow">
+        <h3 class="font-semibold text-lg mb-4 text-ink">😔 Lo que sientes hoy</h3>
+        <ul class="space-y-3 text-muted text-sm md:text-base">
+          <li>• Piel opaca y cansada, sin importar cuánto duermas</li>
+          <li>• Gastas $60-$90 por sesión de facial y el efecto dura poco</li>
+          <li>• No tienes tiempo (ni ganas) de ir a una clínica cada semana</li>
+          <li>• Probaste mil cremas y ninguna te convenció del todo</li>
+        </ul>
+      </div>
+      <div class="fade-in bg-blush/40 rounded-2xl p-6 md:p-8 card-shadow border border-gold/20">
+        <h3 class="font-semibold text-lg mb-4 text-ink">✨ Con GlowRitual</h3>
+        <ul class="space-y-3 text-ink/80 text-sm md:text-base">
+          <li>• 10 minutos al día, sentada en tu sofá viendo tu serie</li>
+          <li>• Una sola compra, cientos de sesiones — se paga sola</li>
+          <li>• Resultados visibles desde la semana 2</li>
+          <li>• Tecnología de luz roja + azul, la misma que usan en spas premium</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section class="py-16 md:py-24">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="text-center mb-14 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">Cómo funciona</h2>
+      <p class="text-muted max-w-xl mx-auto">Tan simple como ponerte una mascarilla — la ciencia hace el resto.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="fade-in text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-lavender/30 flex items-center justify-center font-serif text-2xl text-lavender-dark mb-5">1</div>
+        <h3 class="font-semibold text-lg mb-2">Ponte la mascarilla</h3>
+        <p class="text-muted text-sm">10 minutos al día, donde estés — sofá, cama, o mientras trabajas desde casa.</p>
+      </div>
+      <div class="fade-in text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-blush flex items-center justify-center font-serif text-2xl text-gold-dark mb-5">2</div>
+        <h3 class="font-semibold text-lg mb-2">La luz LED actúa</h3>
+        <p class="text-muted text-sm">Luz roja (660nm) estimula colágeno y firmeza. Luz azul ayuda con acné y rojeces.</p>
+      </div>
+      <div class="fade-in text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-gold/20 flex items-center justify-center font-serif text-2xl text-gold-dark mb-5">3</div>
+        <h3 class="font-semibold text-lg mb-2">Ves resultados</h3>
+        <p class="text-muted text-sm">Piel más luminosa desde la semana 2, más firme y pareja hacia la semana 4.</p>
+      </div>
+    </div>
+
+    <p class="text-xs text-muted text-center max-w-xl mx-auto mt-10">
+      * Resultados individuales pueden variar. GlowRitual Mask es un producto de
+      bienestar y cuidado personal, no un dispositivo médico ni un tratamiento clínico.
+    </p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="text-center mb-14 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">Lo que dicen quienes ya lo prueban</h2>
+    </div>
+
+    <!--
+      ⚠️ TESTIMONIOS DE EJEMPLO — reemplaza por reseñas reales de tus clientas
+      antes de publicar el sitio. Nunca publiques testimonios inventados
+      presentándolos como reales: es información engañosa y puede meterte
+      en problemas legales y con las plataformas de ads.
+    -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="fade-in bg-cream rounded-2xl p-6 card-shadow">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="avatar w-11 h-11 rounded-full bg-lavender">V</span>
+          <div>
+            <p class="font-medium text-sm">Valentina R. <span class="text-xs text-muted">(reseña de ejemplo)</span></p>
+            <p class="text-gold-dark text-xs">★★★★★</p>
+          </div>
+        </div>
+        <p class="text-sm text-muted">"En dos semanas mi piel se veía visiblemente más tersa. Lo uso viendo Netflix, ni lo siento."</p>
+      </div>
+      <div class="fade-in bg-cream rounded-2xl p-6 card-shadow">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="avatar w-11 h-11 rounded-full bg-gold">M</span>
+          <div>
+            <p class="font-medium text-sm">Marisol T. <span class="text-xs text-muted">(reseña de ejemplo)</span></p>
+            <p class="text-gold-dark text-xs">★★★★★</p>
+          </div>
+        </div>
+        <p class="text-sm text-muted">"Dejé de pagar facial cada mes. Esto se pagó solo en la primera sesión que me ahorré."</p>
+      </div>
+      <div class="fade-in bg-cream rounded-2xl p-6 card-shadow">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="avatar w-11 h-11 rounded-full bg-blush-dark">C</span>
+          <div>
+            <p class="font-medium text-sm">Camila G. <span class="text-xs text-muted">(reseña de ejemplo)</span></p>
+            <p class="text-gold-dark text-xs">★★★★★</p>
+          </div>
+        </div>
+        <p class="text-sm text-muted">"Pensé que era exagerado hasta que lo probé. Se siente como un mini spa cada noche."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANTES / DESPUÉS ============ -->
+<section class="py-16 md:py-24">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+    <div class="text-center mb-12 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">Antes / Después</h2>
+      <p class="text-muted">Resultados reportados tras uso constante de 10 min/día.</p>
+    </div>
+
+    <!--
+      ⚠️ PLACEHOLDER — reemplaza estos dos bloques por fotos reales de
+      antes/después de clientas que hayan dado su consentimiento explícito
+      para usar su imagen. No publiques comparaciones fabricadas.
+    -->
+    <div class="fade-in grid grid-cols-2 gap-3 md:gap-6">
+      <div class="aspect-[3/4] rounded-2xl bg-gradient-to-br from-blush to-blush-dark flex items-end justify-center p-4 card-shadow">
+        <span class="bg-white/90 text-xs md:text-sm font-medium px-4 py-2 rounded-full">Antes — Semana 0</span>
+      </div>
+      <div class="aspect-[3/4] rounded-2xl bg-gradient-to-br from-lavender to-lavender-dark flex items-end justify-center p-4 card-shadow">
+        <span class="bg-white/90 text-xs md:text-sm font-medium px-4 py-2 rounded-full">Después — Semana 4</span>
+      </div>
+    </div>
+    <p class="text-xs text-muted text-center mt-6">Foto ilustrativa de referencia. Sustituir por fotografía real del cliente con su autorización.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+    <div class="text-center mb-12 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">Preguntas frecuentes</h2>
+    </div>
+
+    <div class="space-y-3" id="faq-list">
+      <div class="faq-item fade-in border border-blush rounded-xl overflow-hidden">
+        <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-medium">
+          ¿Es seguro usar luz LED en la cara?
+          <span class="faq-icon text-gold-dark text-xl leading-none">+</span>
+        </button>
+        <div class="faq-answer px-5 text-sm text-muted">
+          <p class="pb-4">Sí. Usamos longitudes de onda de bajo nivel (luz roja e infrarroja) ampliamente
+          utilizadas en dispositivos de bienestar para el hogar. No emite rayos UV.
+          Como con cualquier producto de cuidado facial, si tienes una condición de piel
+          específica consulta primero con tu dermatólogo.</p>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in border border-blush rounded-xl overflow-hidden">
+        <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-medium">
+          ¿Cuánto tardo en ver resultados?
+          <span class="faq-icon text-gold-dark text-xl leading-none">+</span>
+        </button>
+        <div class="faq-answer px-5 text-sm text-muted">
+          <p class="pb-4">La mayoría de clientas reporta piel más luminosa desde la segunda semana de uso
+          constante (10 min/día), con mejoras en firmeza notables hacia la semana 4.</p>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in border border-blush rounded-xl overflow-hidden">
+        <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-medium">
+          ¿Sirve para todo tipo de piel?
+          <span class="faq-icon text-gold-dark text-xl leading-none">+</span>
+        </button>
+        <div class="faq-answer px-5 text-sm text-muted">
+          <p class="pb-4">Sí, es apta para todo tipo de piel. Si estás embarazada, tienes epilepsia o
+          alguna condición fotosensible, te recomendamos consultar con tu médico antes de usarla.</p>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in border border-blush rounded-xl overflow-hidden">
+        <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-medium">
+          ¿Qué pasa si no me gusta?
+          <span class="faq-icon text-gold-dark text-xl leading-none">+</span>
+        </button>
+        <div class="faq-answer px-5 text-sm text-muted">
+          <p class="pb-4">Tienes 30 días de garantía desde que la recibes. Si no estás conforme,
+          te devolvemos tu dinero, sin preguntas incómodas.</p>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in border border-blush rounded-xl overflow-hidden">
+        <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-medium">
+          ¿Cuánto tarda el envío?
+          <span class="faq-icon text-gold-dark text-xl leading-none">+</span>
+        </button>
+        <div class="faq-answer px-5 text-sm text-muted">
+          <p class="pb-4">El envío es gratis y el tiempo estimado se muestra al finalizar tu compra
+          según tu ubicación. <!-- Actualiza este texto con tu tiempo real de envío --></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFERTA / URGENCIA ============ -->
+<section id="oferta" class="py-16 md:py-24 bg-ink text-white relative overflow-hidden">
+  <div class="absolute inset-0 opacity-20 glow-orb"></div>
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center relative fade-in">
+    <span class="inline-block text-xs tracking-[0.2em] uppercase text-gold mb-4">Oferta de lanzamiento</span>
+    <h2 class="font-serif text-3xl md:text-4xl mb-4">Empieza tu ritual hoy</h2>
+    <p class="text-white/70 mb-8 max-w-md mx-auto">30% de descuento por tiempo limitado. Quedan pocas unidades de este lote.</p>
+
+    <div class="flex items-center justify-center gap-4 mb-8">
+      <span class="text-white/50 line-through text-lg">$79</span>
+      <span class="font-serif text-4xl text-gold">$49</span>
+    </div>
+
+    <div id="countdown" class="flex items-center justify-center gap-3 md:gap-5 mb-10">
+      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-h">00</div><div class="text-[10px] uppercase text-white/50">Horas</div></div>
+      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-m">00</div><div class="text-[10px] uppercase text-white/50">Min</div></div>
+      <div class="text-center"><div class="font-serif text-2xl md:text-3xl" id="cd-s">00</div><div class="text-[10px] uppercase text-white/50">Seg</div></div>
+    </div>
+
+    <a href="#" class="btn-gold inline-block text-white font-medium px-10 py-4 rounded-full shadow-lg">
+      Comprar ahora — Stock limitado
+    </a>
+    <p class="text-xs text-white/40 mt-4">Quedan 23 unidades disponibles a este precio. <!-- Actualiza con tu stock real --></p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="py-14 bg-cream border-t border-blush">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-8 mb-10 text-sm">
+      <div>
+        <p class="font-serif text-xl mb-3">GlowRitual</p>
+        <p class="text-muted">Tu ritual de spa, en casa. Fototerapia LED para tu piel, sin salir de tu sofá.</p>
+      </div>
+      <div>
+        <p class="font-semibold mb-3">Garantía</p>
+        <p class="text-muted">30 días de devolución sin preguntas. Si no te convence, te devolvemos tu dinero.</p>
+      </div>
+      <div>
+        <p class="font-semibold mb-3">Síguenos</p>
+        <p class="text-muted">@glowritual — Instagram · TikTok</p>
+        <!-- Actualiza con tus enlaces reales de redes sociales -->
+      </div>
+    </div>
+    <div class="border-t border-blush pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted">
+      <p>© <span id="year"></span> GlowRitual. Todos los derechos reservados.</p>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-ink">Privacidad</a>
+        <a href="#" class="hover:text-ink">Términos</a>
+        <a href="#" class="hover:text-ink">Contacto</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/95 backdrop-blur border-t border-blush px-4 py-3">
+  <a href="#oferta" class="btn-gold block text-center text-white font-medium py-3 rounded-full shadow">
+    Comprar ahora — $49
+  </a>
+</div>
+
+<script>
+  // Año en footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Countdown — reinicia cada 24h para mantener la sensación de urgencia
+  // (Cambia END_HOURS o fija una fecha real con Date si prefieres una oferta con fin real)
+  function startCountdown() {
+    const END_HOURS = 24;
+    let deadline = localStorage.getItem('glowritual_deadline');
+    const now = Date.now();
+    if (!deadline || Number(deadline) < now) {
+      deadline = now + END_HOURS * 60 * 60 * 1000;
+      localStorage.setItem('glowritual_deadline', deadline);
+    }
+    function tick() {
+      const diff = Math.max(0, Number(deadline) - Date.now());
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-h').textContent = String(h).padStart(2, '0');
+      document.getElementById('cd-m').textContent = String(m).padStart(2, '0');
+      document.getElementById('cd-s').textContent = String(s).padStart(2, '0');
+      if (diff <= 0) { localStorage.removeItem('glowritual_deadline'); startCountdown(); }
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+  startCountdown();
+</script>
+
+</body>
+</html>
