@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6e8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fff6e8" stop-opacity="0.08"/>
+    </linearGradient>
+    <radialGradient id="croissant" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#f7c46b"/>
+      <stop offset="1" stop-color="#b8692a"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#2b1d16"/>
+  <rect x="60" y="380" width="960" height="1160" rx="24" fill="#4a3226"/>
+  <rect x="100" y="760" width="880" height="14" fill="#c9b8a4"/>
+  <rect x="100" y="1140" width="880" height="14" fill="#c9b8a4"/>
+  <g>
+    <path d="M160 700 q90 -140 180 0 q-90 40 -180 0 z" fill="url(#croissant)"/>
+    <path d="M390 700 q90 -140 180 0 q-90 40 -180 0 z" fill="url(#croissant)"/>
+    <path d="M620 700 q90 -140 180 0 q-90 40 -180 0 z" fill="url(#croissant)"/>
+  </g>
+  <g>
+    <rect x="170" y="1000" width="170" height="120" rx="14" fill="#6b3b1e"/><rect x="170" y="1000" width="170" height="36" rx="14" fill="#f3ead8"/>
+    <circle cx="255" cy="990" r="18" fill="#d8323a"/>
+    <rect x="420" y="990" width="170" height="130" rx="14" fill="#f2c38b"/><rect x="420" y="1040" width="170" height="16" fill="#8a4f25"/>
+    <circle cx="760" cy="1060" r="80" fill="#e8a548"/><circle cx="760" cy="1060" r="30" fill="#2b1d16"/>
+  </g>
+  <g>
+    <circle cx="240" cy="1400" r="80" fill="#d9a066"/><circle cx="240" cy="1400" r="50" fill="#f7e2c0"/>
+    <circle cx="500" cy="1410" r="80" fill="#d9a066"/><circle cx="500" cy="1410" r="50" fill="#f7e2c0"/>
+    <circle cx="760" cy="1400" r="80" fill="#d9a066"/><circle cx="760" cy="1400" r="50" fill="#f7e2c0"/>
+  </g>
+  <rect x="60" y="380" width="960" height="1160" rx="24" fill="url(#glass)"/>
+  <path d="M140 420 L320 420 L160 1500 L100 1500 Z" fill="#ffffff" opacity="0.07"/>
+  <rect x="380" y="220" width="320" height="100" rx="50" fill="#f2c38b"/>
+  <text x="540" y="288" font-family="Georgia, serif" font-size="46" fill="#2b1d16" text-anchor="middle">Hoy</text>
+  <text x="540" y="1860" font-family="Arial, sans-serif" font-size="30" fill="#ffffff" opacity="0.55" text-anchor="middle">FOTO DE EJEMPLO · reemplazar por la tuya</text>
+</svg>

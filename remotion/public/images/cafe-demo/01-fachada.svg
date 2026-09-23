@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6c89a"/>
+      <stop offset="1" stop-color="#e79a6a"/>
+    </linearGradient>
+    <pattern id="brick" width="80" height="40" patternUnits="userSpaceOnUse">
+      <rect width="80" height="40" fill="#8a4b32"/>
+      <rect x="2" y="2" width="76" height="17" fill="#9c5a3c"/>
+      <rect x="-38" y="22" width="76" height="16" fill="#9c5a3c"/>
+      <rect x="42" y="22" width="76" height="16" fill="#9c5a3c"/>
+    </pattern>
+    <pattern id="awning" width="120" height="10" patternUnits="userSpaceOnUse">
+      <rect width="60" height="10" fill="#2f5d50"/>
+      <rect x="60" width="60" height="10" fill="#f3ead8"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#sky)"/>
+  <rect y="360" width="1080" height="1300" fill="url(#brick)"/>
+  <rect x="120" y="420" width="840" height="130" rx="10" fill="#1f2a26"/>
+  <text x="540" y="510" font-family="Georgia, serif" font-size="84" fill="#f2c38b" text-anchor="middle" letter-spacing="10">CAFÉ</text>
+  <path d="M60 600 H1020 L980 760 H100 Z" fill="url(#awning)"/>
+  <rect x="140" y="800" width="460" height="560" fill="#2a1c14"/>
+  <rect x="160" y="820" width="420" height="520" fill="#f7d9a8" opacity="0.85"/>
+  <circle cx="300" cy="1000" r="46" fill="#fff2d9"/>
+  <circle cx="450" cy="1060" r="40" fill="#fff2d9"/>
+  <rect x="200" y="1180" width="340" height="18" fill="#6b4230"/>
+  <rect x="680" y="800" width="260" height="620" fill="#3a2418"/>
+  <rect x="700" y="820" width="220" height="280" fill="#f7d9a8" opacity="0.7"/>
+  <circle cx="900" cy="1140" r="12" fill="#f2c38b"/>
+  <rect y="1660" width="1080" height="260" fill="#5a5048"/>
+  <rect x="120" y="1360" width="160" height="300" rx="20" fill="#3b6b4f"/>
+  <circle cx="200" cy="1330" r="90" fill="#4f8a63"/>
+  <text x="540" y="1860" font-family="Arial, sans-serif" font-size="30" fill="#ffffff" opacity="0.55" text-anchor="middle">FOTO DE EJEMPLO · reemplazar por la tuya</text>
+</svg>

@@ -1,0 +1,12 @@
+/* Reset mínimo. Sin Tailwind: cada plantilla se estiliza con objetos de
+   estilo en TS para quedar 100% autocontenida (importante para el render
+   por lotes, donde no hay "purga" de CSS que dependa del árbol de la app). */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

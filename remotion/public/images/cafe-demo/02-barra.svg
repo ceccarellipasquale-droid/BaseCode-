@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b2a20"/>
+      <stop offset="1" stop-color="#5a3e2d"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aa0a6"/>
+      <stop offset="0.5" stop-color="#e6e8ea"/>
+      <stop offset="1" stop-color="#8a9096"/>
+    </linearGradient>
+    <pattern id="wood" width="1080" height="60" patternUnits="userSpaceOnUse">
+      <rect width="1080" height="60" fill="#8b5a3c"/>
+      <rect y="28" width="1080" height="4" fill="#6f4530"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#wall)"/>
+  <rect x="80" y="260" width="920" height="16" fill="#c08a5a"/>
+  <rect x="80" y="520" width="920" height="16" fill="#c08a5a"/>
+  <g fill="#f3ead8">
+    <rect x="130" y="180" width="70" height="80" rx="8"/><rect x="230" y="180" width="70" height="80" rx="8"/>
+    <rect x="330" y="180" width="70" height="80" rx="8"/><rect x="430" y="180" width="70" height="80" rx="8"/>
+  </g>
+  <g fill="#2f5d50">
+    <rect x="600" y="400" width="90" height="120" rx="10"/><rect x="720" y="380" width="90" height="140" rx="10"/>
+    <rect x="840" y="410" width="90" height="110" rx="10"/>
+  </g>
+  <circle cx="220" cy="440" r="60" fill="#f2c38b" opacity="0.9"/>
+  <rect x="260" y="700" width="560" height="420" rx="30" fill="url(#steel)"/>
+  <rect x="300" y="740" width="480" height="90" rx="14" fill="#2a2a2b"/>
+  <circle cx="380" cy="785" r="22" fill="#e04b3a"/><circle cx="460" cy="785" r="22" fill="#f2c38b"/>
+  <rect x="360" y="880" width="60" height="120" fill="#555a5f"/><rect x="660" y="880" width="60" height="120" fill="#555a5f"/>
+  <rect x="340" y="1020" width="100" height="70" rx="10" fill="#f3ead8"/>
+  <rect x="640" y="1020" width="100" height="70" rx="10" fill="#f3ead8"/>
+  <path d="M390 1010 q10 -40 0 -80" stroke="#ffffff" stroke-width="6" fill="none" opacity="0.5"/>
+  <rect y="1120" width="1080" height="800" fill="url(#wood)"/>
+  <rect y="1120" width="1080" height="40" fill="#c08a5a"/>
+  <text x="540" y="1860" font-family="Arial, sans-serif" font-size="30" fill="#ffffff" opacity="0.55" text-anchor="middle">FOTO DE EJEMPLO · reemplazar por la tuya</text>
+</svg>
