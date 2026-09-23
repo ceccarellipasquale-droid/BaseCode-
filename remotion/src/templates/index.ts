@@ -2,6 +2,11 @@ import type React from "react";
 import type { z } from "zod";
 import { DancingAnimals, dancingAnimalsSchema } from "./DancingAnimals";
 import { InfiniteLoop, infiniteLoopSchema } from "./InfiniteLoop";
+import {
+  PhotoStory,
+  getPhotoStoryDurationInFrames,
+  photoStorySchema,
+} from "./PhotoStory";
 
 type TemplateEntry<Props> = {
   label: string;
@@ -58,6 +63,25 @@ export const templates = {
     }),
     getDurationInFrames: (props, fps) =>
       Math.round(props.durationInSeconds * fps),
+  }),
+  "photo-story": defineTemplate({
+    label: "Historia en fotos (Ken Burns)",
+    component: PhotoStory,
+    schema: photoStorySchema,
+    defaultProps: photoStorySchema.parse({
+      title: "Café de la Esquina",
+      subtitle: "Tostado artesanal · desde 2019",
+      photos: [
+        { src: "/images/cafe-demo/01-fachada.svg" },
+        { src: "/images/cafe-demo/02-barra.svg", caption: "La barra" },
+        { src: "/images/cafe-demo/03-latte.svg", caption: "Latte art" },
+        { src: "/images/cafe-demo/04-pasteleria.svg", caption: "Pastelería del día" },
+        { src: "/images/cafe-demo/05-mesa.svg", caption: "Te esperamos ☕" },
+      ],
+    }),
+    // La duración NO es un campo: sale de sumar las fotos y restar las
+    // superposiciones de las transiciones (ver PhotoStory.tsx).
+    getDurationInFrames: getPhotoStoryDurationInFrames,
   }),
 } as const;
 

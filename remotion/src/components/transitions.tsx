@@ -3,6 +3,24 @@ import { slide } from "@remotion/transitions/slide";
 import { wipe } from "@remotion/transitions/wipe";
 import { linearTiming } from "@remotion/transitions";
 import { TransitionSeries } from "@remotion/transitions";
+import type {
+  TransitionPresentation,
+  TransitionTiming,
+} from "@remotion/transitions";
+
+type AnyPresentation = TransitionPresentation<Record<string, unknown>>;
+
+/**
+ * Cada preset tiene su propio tipo de props (SlideProps, WipeProps...),
+ * así que sin esto la función devuelve una UNIÓN que
+ * `<TransitionSeries.Transition>` no sabe aceptar. Se unifica el tipo acá,
+ * una sola vez: los props concretos ya están fijados dentro de cada
+ * presentación y nadie los vuelve a leer desde afuera.
+ */
+export type SmoothTransition = {
+  presentation: AnyPresentation;
+  timing: TransitionTiming;
+};
 
 /**
  * Transiciones reutilizables entre escenas.
@@ -30,22 +48,26 @@ export const smoothTransition = (
   preset: TransitionPreset,
   durationInSeconds: number,
   fps: number,
-) => {
+): SmoothTransition => {
   const timing = linearTiming({
     durationInFrames: Math.round(durationInSeconds * fps),
   });
 
-  switch (preset) {
-    case "slide-left":
-      return { presentation: slide({ direction: "from-right" }), timing };
-    case "slide-right":
-      return { presentation: slide({ direction: "from-left" }), timing };
-    case "wipe-up":
-      return { presentation: wipe({ direction: "from-bottom" }), timing };
-    case "fade":
-    default:
-      return { presentation: fade(), timing };
-  }
+  const presentation = (() => {
+    switch (preset) {
+      case "slide-left":
+        return slide({ direction: "from-right" });
+      case "slide-right":
+        return slide({ direction: "from-left" });
+      case "wipe-up":
+        return wipe({ direction: "from-bottom" });
+      case "fade":
+      default:
+        return fade();
+    }
+  })();
+
+  return { presentation: presentation as unknown as AnyPresentation, timing };
 };
 
 export { TransitionSeries };

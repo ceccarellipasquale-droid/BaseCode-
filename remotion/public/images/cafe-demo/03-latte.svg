@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <pattern id="table" width="1080" height="90" patternUnits="userSpaceOnUse">
+      <rect width="1080" height="90" fill="#a4704a"/>
+      <rect y="42" width="1080" height="5" fill="#8a5a3a"/>
+      <rect y="70" width="1080" height="2" fill="#b98460"/>
+    </pattern>
+    <radialGradient id="coffee" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c98a52"/>
+      <stop offset="0.8" stop-color="#8a4f25"/>
+      <stop offset="1" stop-color="#5b3217"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#table)"/>
+  <ellipse cx="560" cy="1000" rx="400" ry="400" fill="#000000" opacity="0.18"/>
+  <circle cx="540" cy="960" r="400" fill="#f3ead8"/>
+  <circle cx="540" cy="960" r="330" fill="#e7dcc6"/>
+  <circle cx="540" cy="960" r="280" fill="#ffffff"/>
+  <circle cx="540" cy="960" r="240" fill="url(#coffee)"/>
+  <path d="M540 1090 C 430 1010, 400 900, 470 870 C 510 855, 535 880, 540 905 C 545 880, 570 855, 610 870 C 680 900, 650 1010, 540 1090 Z" fill="#fbf1e0"/>
+  <path d="M540 1120 L540 1180" stroke="#fbf1e0" stroke-width="14" stroke-linecap="round"/>
+  <rect x="820" y="920" width="160" height="60" rx="30" fill="#ffffff"/>
+  <rect x="120" y="1420" width="380" height="36" rx="18" fill="#d9d4cc" transform="rotate(-18 310 1438)"/>
+  <circle cx="820" cy="1520" r="26" fill="#6b3b1e"/><circle cx="880" cy="1560" r="22" fill="#6b3b1e"/>
+  <circle cx="850" cy="1610" r="24" fill="#6b3b1e"/>
+  <text x="540" y="1860" font-family="Arial, sans-serif" font-size="30" fill="#ffffff" opacity="0.6" text-anchor="middle">FOTO DE EJEMPLO · reemplazar por la tuya</text>
+</svg>
