@@ -22,13 +22,70 @@ const resolveSrc = (src: string) =>
 /** Rotación automática de movimientos: dos fotos seguidas nunca se mueven igual. */
 const AUTO_MOVES: Move[] = ["zoom-in", "pan-right", "zoom-out", "pan-left", "pan-up"];
 
-// --- Tiempos: compartidos con el registro (src/templates/index.ts) para
-// que la duración de la composición coincida EXACTO con la de la serie. ---
-export const photoFrames = (photo: Photo, fps: number) =>
-  Math.round(photo.durationInSeconds * fps);
+// --- Ritmo de los textos (en frames). Las mismas constantes las usan las
+// animaciones de abajo Y el cálculo de duración mínima de cada foto, para
+// que lo que se calcula sea exactamente lo que se ve. ---
+const CAPTION_DELAY = 4;
+const CAPTION_FADE = 14;
+const TITLE_DELAY = 6;
+const TITLE_FADE_IN = 16;
+const TITLE_FADE_OUT = 14;
+const LINE_OFFSET = 18; // las líneas del cierre entran después del título...
+const LINE_STAGGER = 7; // ...de a una
+const LINE_FADE = 12;
+const END_FADE = 15; // fundido a negro final
+
+/**
+ * Tiempo que un texto tiene que quedar QUIETO y 100% visible para leerse
+ * cómodo. Criterio de subtitulado profesional: ~14 caracteres por
+ * segundo (un poco por debajo del estándar de 15-17, porque en redes se
+ * mira de pasada), con un piso de 1.8s para que un texto corto no
+ * parpadee y un techo de 4s para que uno largo no aburra.
+ */
+const READING_CPS = 14;
+const readingFrames = (text: string, fps: number) =>
+  Math.round(Math.min(4, Math.max(1.8, text.length / READING_CPS)) * fps);
 
 export const transitionFrames = (props: PhotoStoryProps, fps: number) =>
   Math.round(props.transitionInSeconds * fps);
+
+/**
+ * Duración real (en frames) de cada foto: la pedida en el JSON, o más si
+ * su texto no alcanza a leerse en ese tiempo. Así nunca hace falta
+ * calcular a mano cuánto dura una foto con leyenda: se pide la duración
+ * "visual" y la plantilla alarga lo que haga falta para la lectura.
+ */
+export const resolvePhotoFrames = (props: PhotoStoryProps, fps: number): number[] => {
+  const tf = transitionFrames(props, fps);
+  const last = props.photos.length - 1;
+  const hasOutro = Boolean(props.outroTitle) && props.photos.length > 1;
+
+  return props.photos.map((photo, i) => {
+    const requested = Math.round(photo.durationInSeconds * fps);
+    const intro = i > 0 ? tf : 0;
+    const outro = i < last ? tf : 0;
+    let needed = 0;
+
+    if (i === 0 && props.title) {
+      const text = `${props.title} ${props.subtitle ?? ""}`;
+      needed =
+        intro + outro + TITLE_DELAY + TITLE_FADE_IN + TITLE_FADE_OUT + readingFrames(text, fps);
+    } else if (i === last && hasOutro) {
+      const lines = props.outroLines ?? [];
+      // Se lee sobre todo lo último que aparece: subtítulo y datos prácticos.
+      const text = [props.outroSubtitle ?? "", ...lines].join(" ");
+      const entrance =
+        lines.length > 0
+          ? LINE_OFFSET + (lines.length - 1) * LINE_STAGGER + LINE_FADE
+          : TITLE_FADE_IN;
+      needed = intro + TITLE_DELAY + entrance + readingFrames(text, fps) + END_FADE;
+    } else if (photo.caption) {
+      needed = intro + outro + CAPTION_DELAY + 2 * CAPTION_FADE + readingFrames(photo.caption, fps);
+    }
+
+    return Math.max(requested, needed);
+  });
+};
 
 /**
  * Las transiciones SUPERPONEN fotos consecutivas (mientras una se funde,
@@ -36,17 +93,16 @@ export const transitionFrames = (props: PhotoStoryProps, fps: number) =>
  * menos una transición por cada unión.
  */
 export const getPhotoStoryDurationInFrames = (props: PhotoStoryProps, fps: number) =>
-  props.photos.reduce((acc, p) => acc + photoFrames(p, fps), 0) -
+  resolvePhotoFrames(props, fps).reduce((acc, f) => acc + f, 0) -
   (props.photos.length - 1) * transitionFrames(props, fps);
 
 /** Frame (global) en el que empieza cada foto, contando las superposiciones. */
-const photoStarts = (props: PhotoStoryProps, fps: number) => {
-  const tf = transitionFrames(props, fps);
+const photoStarts = (frames: number[], tf: number) => {
   const starts: number[] = [];
   let acc = 0;
-  props.photos.forEach((p) => {
+  frames.forEach((f) => {
     starts.push(acc);
-    acc += photoFrames(p, fps) - tf;
+    acc += f - tf;
   });
   return starts;
 };
@@ -168,15 +224,15 @@ const Caption: React.FC<{
   accentColor: string;
 }> = ({ text, durationInFrames, introFrames, outroFrames, textColor, accentColor }) => {
   const frame = useCurrentFrame();
-  const inStart = introFrames + 6;
+  const inStart = introFrames + CAPTION_DELAY;
   const outEnd = durationInFrames - outroFrames;
   const opacity = interpolate(
     frame,
-    [inStart, inStart + 12, outEnd - 10, outEnd],
+    [inStart, inStart + CAPTION_FADE, outEnd - CAPTION_FADE, outEnd],
     [0, 1, 1, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
-  const lift = interpolate(frame, [inStart, inStart + 12], [24, 0], {
+  const lift = interpolate(frame, [inStart, inStart + CAPTION_FADE], [24, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -227,19 +283,21 @@ const TitleCard: React.FC<{
   textColor: string;
 }> = ({ title, subtitle, lines, durationInFrames, introFrames, outroFrames, textColor }) => {
   const frame = useCurrentFrame();
-  const inStart = introFrames + 6;
+  const inStart = introFrames + TITLE_DELAY;
   const outEnd = durationInFrames - outroFrames;
   const opacity =
     outroFrames > 0
-      ? interpolate(frame, [inStart, inStart + 16, outEnd - 14, outEnd], [0, 1, 1, 0], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        })
-      : interpolate(frame, [inStart, inStart + 16], [0, 1], {
+      ? interpolate(
+          frame,
+          [inStart, inStart + TITLE_FADE_IN, outEnd - TITLE_FADE_OUT, outEnd],
+          [0, 1, 1, 0],
+          { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+        )
+      : interpolate(frame, [inStart, inStart + TITLE_FADE_IN], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
         });
-  const scale = interpolate(frame, [inStart, inStart + 16], [0.96, 1], {
+  const scale = interpolate(frame, [inStart, inStart + TITLE_FADE_IN], [0.96, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -305,8 +363,8 @@ const TitleCard: React.FC<{
           >
             {lines.map((line, i) => {
               // Entran de a una, después del título: el ojo lee en orden.
-              const lineStart = inStart + 18 + i * 7;
-              const lineOpacity = interpolate(frame, [lineStart, lineStart + 12], [0, 1], {
+              const lineStart = inStart + LINE_OFFSET + i * LINE_STAGGER;
+              const lineOpacity = interpolate(frame, [lineStart, lineStart + LINE_FADE], [0, 1], {
                 extrapolateLeft: "clamp",
                 extrapolateRight: "clamp",
               });
@@ -373,11 +431,12 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
   const { fps, durationInFrames } = useVideoConfig();
 
   const tf = transitionFrames(props, fps);
-  const starts = photoStarts(props, fps);
+  const frames = resolvePhotoFrames(props, fps);
+  const starts = photoStarts(frames, tf);
   const last = photos.length - 1;
   const hasOutro = Boolean(outroTitle) && photos.length > 1;
   // Fundido a negro de los últimos ~0.5s, sincronizado con el de la música.
-  const fadeToBlack = interpolate(frame, [durationInFrames - 15, durationInFrames - 1], [0, 1], {
+  const fadeToBlack = interpolate(frame, [durationInFrames - END_FADE, durationInFrames - 1], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -403,11 +462,11 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
                   {...smoothTransition(photo.transition, transitionInSeconds, fps)}
                 />
               ) : null}
-              <TransitionSeries.Sequence durationInFrames={photoFrames(photo, fps)}>
+              <TransitionSeries.Sequence durationInFrames={frames[i]}>
                 <KenBurnsPhoto
                   photo={photo}
                   move={photo.move ?? AUTO_MOVES[i % AUTO_MOVES.length]}
-                  durationInFrames={photoFrames(photo, fps)}
+                  durationInFrames={frames[i]}
                 />
               </TransitionSeries.Sequence>
             </React.Fragment>
@@ -433,10 +492,10 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
       {/* Textos: capa aparte, fuera del temblor de cámara (son "postproducción"). */}
       {photos.map((photo, i) =>
         photo.caption && !(i === 0 && title) && !(i === last && hasOutro) ? (
-          <Sequence key={i} from={starts[i]} durationInFrames={photoFrames(photo, fps)}>
+          <Sequence key={i} from={starts[i]} durationInFrames={frames[i]}>
             <Caption
               text={photo.caption}
-              durationInFrames={photoFrames(photo, fps)}
+              durationInFrames={frames[i]}
               introFrames={i > 0 ? tf : 0}
               outroFrames={i < photos.length - 1 ? tf : 0}
               textColor={textColor}
@@ -447,11 +506,11 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
       )}
 
       {title ? (
-        <Sequence durationInFrames={photoFrames(photos[0], fps)}>
+        <Sequence durationInFrames={frames[0]}>
           <TitleCard
             title={title}
             subtitle={subtitle}
-            durationInFrames={photoFrames(photos[0], fps)}
+            durationInFrames={frames[0]}
             introFrames={0}
             outroFrames={photos.length > 1 ? tf : 0}
             textColor={textColor}
@@ -460,12 +519,12 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
       ) : null}
 
       {hasOutro && outroTitle ? (
-        <Sequence from={starts[last]} durationInFrames={photoFrames(photos[last], fps)}>
+        <Sequence from={starts[last]} durationInFrames={frames[last]}>
           <TitleCard
             title={outroTitle}
             subtitle={outroSubtitle}
             lines={outroLines}
-            durationInFrames={photoFrames(photos[last], fps)}
+            durationInFrames={frames[last]}
             introFrames={tf}
             outroFrames={0}
             textColor={textColor}

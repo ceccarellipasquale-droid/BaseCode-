@@ -98,9 +98,9 @@
       "subtitle": "Flexitarian health food · Pisac",
       "outroTitle": "Te esperamos",
       "outroSubtitle": "Kula · Flexitarian health food",
-      "transitionInSeconds": 0.5,
-      "handheld": 0.8,
-      "audioSrc": "/audio/lofi-epiano-95bpm.mp3",
+      "transitionInSeconds": 0.7,
+      "handheld": 0.6,
+      "audioSrc": "/audio/sleepy-upright-piano.mp3",
       "accentColor": "#8fe0d0",
       "tintOpacity": 0.06,
       "photos": [

@@ -15,13 +15,14 @@ descripción del video:
 > Música: "salsa loop intro 110 bpm" por oymaldonado (freesound.org),
 > licencia CC BY 4.0.
 
-## lofi-epiano-95bpm.mp3
+## sleepy-upright-piano.mp3
 
-- **Título original:** "Lofi Vinyl E-Piano Loop 95 BPM"
-- **Autor:** [holizna](https://freesound.org/people/holizna/) (Freesound.org)
-- **Fuente:** https://freesound.org/people/holizna/sounds/629176/
+- **Título original:** "Sleepy Upright Piano Seamless Loop"
+- **Autor:** [blankie.rest](https://freesound.org/people/blankie.rest/) (Freesound.org)
+- **Fuente:** https://freesound.org/people/blankie.rest/sounds/859607/
 - **Licencia:** [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/)
-  (dominio público). El autor aclara que no hace falta darle crédito,
-  aunque lo agradece.
+  (dominio público, no requiere crédito). Composición encargada para
+  Blankie, una app de sonidos ambientales de código abierto, y publicada
+  por la propia cuenta de la app.
 
 Usada en el video de Kula (`kula-cafe-reel` en data/videos.json).
