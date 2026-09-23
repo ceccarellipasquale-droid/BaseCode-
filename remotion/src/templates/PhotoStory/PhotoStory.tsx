@@ -220,11 +220,12 @@ const Caption: React.FC<{
 const TitleCard: React.FC<{
   title: string;
   subtitle?: string;
+  lines?: string[];
   durationInFrames: number;
   introFrames: number;
   outroFrames: number;
   textColor: string;
-}> = ({ title, subtitle, durationInFrames, introFrames, outroFrames, textColor }) => {
+}> = ({ title, subtitle, lines, durationInFrames, introFrames, outroFrames, textColor }) => {
   const frame = useCurrentFrame();
   const inStart = introFrames + 6;
   const outEnd = durationInFrames - outroFrames;
@@ -257,7 +258,7 @@ const TitleCard: React.FC<{
         style={{
           position: "absolute",
           width: 1000,
-          height: 520,
+          height: lines && lines.length > 0 ? 800 : 520,
           opacity,
           background: "radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%)",
         }}
@@ -291,6 +292,44 @@ const TitleCard: React.FC<{
             {subtitle}
           </p>
         ) : null}
+        {lines && lines.length > 0 ? (
+          <div
+            style={{
+              marginTop: 36,
+              paddingTop: 28,
+              borderTop: `2px solid ${textColor}40`,
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+            }}
+          >
+            {lines.map((line, i) => {
+              // Entran de a una, después del título: el ojo lee en orden.
+              const lineStart = inStart + 18 + i * 7;
+              const lineOpacity = interpolate(frame, [lineStart, lineStart + 12], [0, 1], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              });
+              return (
+                <p
+                  key={i}
+                  style={{
+                    fontFamily: fonts.body,
+                    fontSize: 32,
+                    fontWeight: 500,
+                    lineHeight: 1.3,
+                    color: textColor,
+                    margin: 0,
+                    opacity: lineOpacity,
+                    textShadow: "0 2px 14px rgba(0,0,0,0.7)",
+                  }}
+                >
+                  {line}
+                </p>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
     </AbsoluteFill>
   );
@@ -320,6 +359,7 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
     subtitle,
     outroTitle,
     outroSubtitle,
+    outroLines,
     photos,
     transitionInSeconds,
     handheld,
@@ -424,6 +464,7 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
           <TitleCard
             title={outroTitle}
             subtitle={outroSubtitle}
+            lines={outroLines}
             durationInFrames={photoFrames(photos[last], fps)}
             introFrames={tf}
             outroFrames={0}

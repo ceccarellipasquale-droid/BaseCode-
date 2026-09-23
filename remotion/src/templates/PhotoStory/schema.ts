@@ -54,6 +54,8 @@ export const photoStorySchema = z.object({
   /** Cierre sobre la última foto (ej. "Te esperamos" + dirección). */
   outroTitle: z.string().max(60).optional(),
   outroSubtitle: z.string().max(80).optional(),
+  /** Datos prácticos del cierre, una línea cada uno (dirección, horario...). */
+  outroLines: z.array(z.string().max(60)).max(4).optional(),
   photos: z.array(photoSchema).min(1).max(20),
   /** Duración del fundido entre fotos. */
   transitionInSeconds: z.number().min(0.2).max(1.5).default(0.6),

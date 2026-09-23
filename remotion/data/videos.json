@@ -97,7 +97,7 @@
       "title": "Kula",
       "subtitle": "Flexitarian health food · Pisac",
       "outroTitle": "Te esperamos",
-      "outroSubtitle": "Kula · Pisac, Valle Sagrado",
+      "outroSubtitle": "Kula · Flexitarian health food",
       "transitionInSeconds": 0.5,
       "handheld": 0.8,
       "audioSrc": "/audio/lofi-epiano-95bpm.mp3",
@@ -148,12 +148,17 @@
         },
         {
           "src": "/images/kula/06-fachada.jpg",
-          "durationInSeconds": 3.6,
+          "durationInSeconds": 4.8,
           "move": "zoom-out",
           "focusX": 25,
           "focusY": 45,
           "transition": "fade"
         }
+      ],
+      "outroLines": [
+        "📍 Grau 675, Písac",
+        "🕒 Lun a sáb 8:30 a.m. – 7 p.m.",
+        "Dom 10:30 a.m. – 4 p.m."
       ]
     }
   }
