@@ -23,11 +23,31 @@
       "durationInSeconds": 8,
       "transitionInSeconds": 0.6,
       "words": [
-        { "text": "Rápido,", "start": 0.4, "end": 0.9 },
-        { "text": "prolijo", "start": 0.9, "end": 1.4 },
-        { "text": "y", "start": 1.4, "end": 1.5 },
-        { "text": "sin", "start": 1.5, "end": 1.7 },
-        { "text": "vueltas.", "start": 1.7, "end": 2.3 }
+        {
+          "text": "Rápido,",
+          "start": 0.4,
+          "end": 0.9
+        },
+        {
+          "text": "prolijo",
+          "start": 0.9,
+          "end": 1.4
+        },
+        {
+          "text": "y",
+          "start": 1.4,
+          "end": 1.5
+        },
+        {
+          "text": "sin",
+          "start": 1.5,
+          "end": 1.7
+        },
+        {
+          "text": "vueltas.",
+          "start": 1.7,
+          "end": 2.3
+        }
       ]
     }
   },
@@ -57,9 +77,83 @@
       "danceCycles": 2,
       "audioSrc": "/audio/salsa-instrumental-loop.mp3",
       "animals": [
-        { "species": "giraffe" },
-        { "species": "lion" },
-        { "species": "zebra" }
+        {
+          "species": "giraffe"
+        },
+        {
+          "species": "lion"
+        },
+        {
+          "species": "zebra"
+        }
+      ]
+    }
+  },
+  {
+    "id": "kula-cafe-reel",
+    "template": "photo-story",
+    "outputName": "kula-cafe-reel",
+    "props": {
+      "title": "Kula",
+      "subtitle": "Flexitarian health food · Pisac",
+      "outroTitle": "Te esperamos",
+      "outroSubtitle": "Kula · Pisac, Valle Sagrado",
+      "transitionInSeconds": 0.5,
+      "handheld": 0.8,
+      "audioSrc": "/audio/lofi-epiano-95bpm.mp3",
+      "accentColor": "#8fe0d0",
+      "tintOpacity": 0.06,
+      "photos": [
+        {
+          "src": "/images/kula/01-calle.jpg",
+          "durationInSeconds": 3.2,
+          "move": "zoom-out",
+          "focusX": 33,
+          "focusY": 42
+        },
+        {
+          "src": "/images/kula/02-interior.jpg",
+          "caption": "Un rincón para quedarte",
+          "durationInSeconds": 2.6,
+          "move": "zoom-in",
+          "focusX": 45,
+          "focusY": 30,
+          "transition": "slide-left"
+        },
+        {
+          "src": "/images/kula/03-bowl-latte.jpg",
+          "caption": "Bowls y lattes llenos de color",
+          "durationInSeconds": 2.6,
+          "move": "zoom-in",
+          "focusX": 40,
+          "focusY": 55,
+          "transition": "wipe-up"
+        },
+        {
+          "src": "/images/kula/04-tostadas.jpg",
+          "caption": "Ingredientes locales y frescos",
+          "durationInSeconds": 2.6,
+          "move": "pan-right",
+          "focusX": 45,
+          "focusY": 70,
+          "transition": "slide-left"
+        },
+        {
+          "src": "/images/kula/05-pizza.jpg",
+          "caption": "Cocina artesana, hecha con alegría",
+          "durationInSeconds": 2.6,
+          "move": "zoom-in",
+          "fit": "blur-fill",
+          "transition": "fade"
+        },
+        {
+          "src": "/images/kula/06-fachada.jpg",
+          "durationInSeconds": 3.6,
+          "move": "zoom-out",
+          "focusX": 25,
+          "focusY": 45,
+          "transition": "fade"
+        }
       ]
     }
   }

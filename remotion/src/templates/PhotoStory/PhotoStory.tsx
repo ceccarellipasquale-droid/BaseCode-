@@ -98,17 +98,56 @@ const KenBurnsPhoto: React.FC<{
   // lado podría quedar más chico que el recorrido y se verían los bordes.
   const isZoom = move === "zoom-in" || move === "zoom-out";
   const origin = isZoom ? `${photo.focusX}% ${photo.focusY}%` : "50% 50%";
+  const src = resolveSrc(photo.src);
+  const cameraMove = `scale(${scale}) translate(${x}%, ${y}%)`;
+
+  if (photo.fit === "blur-fill") {
+    return (
+      <AbsoluteFill>
+        {/* Fondo: la misma foto, agrandada y desenfocada. Escala extra para
+            que el borde oscuro que deja el blur quede fuera de cuadro. */}
+        <Img
+          src={src}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "blur(40px) brightness(0.75) saturate(1.2)",
+            transform: "scale(1.2)",
+          }}
+        />
+        {/* Frente: la foto entera, con el movimiento de cámara y una sombra
+            que la despega del fondo. */}
+        <AbsoluteFill>
+          <Img
+            src={src}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              transformOrigin: origin,
+              transform: cameraMove,
+              filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.5))",
+            }}
+          />
+        </AbsoluteFill>
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill>
       <Img
-        src={resolveSrc(photo.src)}
+        src={src}
         style={{
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          // Qué parte de la foto sobrevive al recorte 9:16 (clave en fotos
+          // horizontales): la del punto de interés, no siempre el centro.
+          objectPosition: `${photo.focusX}% ${photo.focusY}%`,
           transformOrigin: origin,
-          transform: `scale(${scale}) translate(${x}%, ${y}%)`,
+          transform: cameraMove,
         }}
       />
     </AbsoluteFill>
@@ -172,24 +211,34 @@ const Caption: React.FC<{
   );
 };
 
-/** Título sobre la primera foto (ej. el nombre del local). */
+/**
+ * Título grande centrado: se usa para la apertura (sobre la primera foto)
+ * y para el cierre (sobre la última). Con `outroFrames` = 0 se queda
+ * hasta el final en vez de irse — el cierre no debe desaparecer antes de
+ * que termine el video.
+ */
 const TitleCard: React.FC<{
   title: string;
   subtitle?: string;
   durationInFrames: number;
+  introFrames: number;
   outroFrames: number;
   textColor: string;
-  accentColor: string;
-}> = ({ title, subtitle, durationInFrames, outroFrames, textColor, accentColor }) => {
+}> = ({ title, subtitle, durationInFrames, introFrames, outroFrames, textColor }) => {
   const frame = useCurrentFrame();
+  const inStart = introFrames + 6;
   const outEnd = durationInFrames - outroFrames;
-  const opacity = interpolate(
-    frame,
-    [6, 22, outEnd - 14, outEnd],
-    [0, 1, 1, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-  );
-  const scale = interpolate(frame, [6, 22], [0.96, 1], {
+  const opacity =
+    outroFrames > 0
+      ? interpolate(frame, [inStart, inStart + 16, outEnd - 14, outEnd], [0, 1, 1, 0], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      : interpolate(frame, [inStart, inStart + 16], [0, 1], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        });
+  const scale = interpolate(frame, [inStart, inStart + 16], [0.96, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -210,7 +259,7 @@ const TitleCard: React.FC<{
           width: 1000,
           height: 520,
           opacity,
-          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%)",
         }}
       />
       <div style={{ opacity, transform: `scale(${scale})`, position: "relative" }}>
@@ -230,7 +279,11 @@ const TitleCard: React.FC<{
             style={{
               ...typography.bodyLg,
               fontFamily: fonts.body,
-              color: accentColor,
+              // Color del texto (no el de acento): el acento suele salir de
+              // la marca y puede coincidir con el fondo de la foto (ej. una
+              // pared pintada del mismo color) y volverse ilegible.
+              color: textColor,
+              opacity: 0.9,
               margin: "20px 0 0",
               textShadow: "0 2px 18px rgba(0,0,0,0.6)",
             }}
@@ -250,7 +303,10 @@ const TitleCard: React.FC<{
  *   - Temblor sutil de "cámara en mano" sobre TODA la serie (como una
  *     sola cámara), hecho con senos de frecuencias distintas para que se
  *     sienta orgánico y no un vaivén regular.
- *   - Fundidos entre fotos (reutiliza src/components/transitions.tsx).
+ *   - Transiciones entre fotos elegibles por foto (fundido, deslizamiento,
+ *     barrido; reutiliza src/components/transitions.tsx).
+ *   - Título de apertura y cierre opcionales, y fundido a negro final
+ *     junto con la música.
  *   - Un tinte cálido y viñeta comunes, para que fotos de distinto origen
  *     se sientan parte del mismo video.
  *
@@ -262,6 +318,8 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
   const {
     title,
     subtitle,
+    outroTitle,
+    outroSubtitle,
     photos,
     transitionInSeconds,
     handheld,
@@ -276,6 +334,13 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
 
   const tf = transitionFrames(props, fps);
   const starts = photoStarts(props, fps);
+  const last = photos.length - 1;
+  const hasOutro = Boolean(outroTitle) && photos.length > 1;
+  // Fundido a negro de los últimos ~0.5s, sincronizado con el de la música.
+  const fadeToBlack = interpolate(frame, [durationInFrames - 15, durationInFrames - 1], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   const shakeX = (Math.sin(frame / 13) * 1.6 + Math.sin(frame / 7.3) * 0.8) * handheld;
   const shakeY = (Math.sin(frame / 11.1) * 1.4 + Math.cos(frame / 5.7) * 0.6) * handheld;
@@ -295,7 +360,7 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
             <React.Fragment key={i}>
               {i > 0 ? (
                 <TransitionSeries.Transition
-                  {...smoothTransition("fade", transitionInSeconds, fps)}
+                  {...smoothTransition(photo.transition, transitionInSeconds, fps)}
                 />
               ) : null}
               <TransitionSeries.Sequence durationInFrames={photoFrames(photo, fps)}>
@@ -327,7 +392,7 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
 
       {/* Textos: capa aparte, fuera del temblor de cámara (son "postproducción"). */}
       {photos.map((photo, i) =>
-        photo.caption && !(i === 0 && title) ? (
+        photo.caption && !(i === 0 && title) && !(i === last && hasOutro) ? (
           <Sequence key={i} from={starts[i]} durationInFrames={photoFrames(photo, fps)}>
             <Caption
               text={photo.caption}
@@ -347,12 +412,27 @@ export const PhotoStory: React.FC<PhotoStoryProps> = (props) => {
             title={title}
             subtitle={subtitle}
             durationInFrames={photoFrames(photos[0], fps)}
+            introFrames={0}
             outroFrames={photos.length > 1 ? tf : 0}
             textColor={textColor}
-            accentColor={accentColor}
           />
         </Sequence>
       ) : null}
+
+      {hasOutro && outroTitle ? (
+        <Sequence from={starts[last]} durationInFrames={photoFrames(photos[last], fps)}>
+          <TitleCard
+            title={outroTitle}
+            subtitle={outroSubtitle}
+            durationInFrames={photoFrames(photos[last], fps)}
+            introFrames={tf}
+            outroFrames={0}
+            textColor={textColor}
+          />
+        </Sequence>
+      ) : null}
+
+      <AbsoluteFill style={{ backgroundColor: "#000000", opacity: fadeToBlack }} />
 
       {audioSrc ? (
         <Audio

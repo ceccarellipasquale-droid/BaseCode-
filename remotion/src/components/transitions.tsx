@@ -42,7 +42,9 @@ export type SmoothTransition = {
  * Se centraliza aquí para que todas las plantillas usen la misma duración
  * y "easing" por defecto, en vez de que cada una reinvente su transición.
  */
-export type TransitionPreset = "fade" | "slide-left" | "slide-right" | "wipe-up";
+/** Lista de presets, exportada para que los schemas Zod puedan validarlos. */
+export const TRANSITION_PRESETS = ["fade", "slide-left", "slide-right", "wipe-up"] as const;
+export type TransitionPreset = (typeof TRANSITION_PRESETS)[number];
 
 export const smoothTransition = (
   preset: TransitionPreset,

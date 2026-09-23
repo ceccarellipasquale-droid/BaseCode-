@@ -1,5 +1,6 @@
 import { zColor } from "@remotion/zod-types";
 import { z } from "zod";
+import { TRANSITION_PRESETS } from "../../components/transitions";
 
 export const KEN_BURNS_MOVES = [
   "zoom-in",
@@ -33,12 +34,26 @@ const photoSchema = z.object({
    */
   focusX: z.number().min(0).max(100).default(50),
   focusY: z.number().min(0).max(100).default(50),
+  /**
+   * "cover": la foto llena la pantalla (recortando lo que sobra, centrado
+   * en focusX/focusY). "blur-fill": la foto entera al centro sobre una
+   * copia desenfocada de sí misma — para fotos horizontales, cuadradas o
+   * de baja resolución que se verían recortadas o pixeladas en 9:16.
+   */
+  fit: z.enum(["cover", "blur-fill"]).default("cover"),
+  /** Transición CON LA QUE ENTRA esta foto (se ignora en la primera). */
+  // Falso positivo: la regla busca la propiedad CSS `transition`; esto es un campo del schema.
+  // eslint-disable-next-line @remotion/non-pure-animation
+  transition: z.enum(TRANSITION_PRESETS).default("fade"),
 });
 
 export const photoStorySchema = z.object({
   /** Título que aparece sobre la primera foto (ej. el nombre del local). */
   title: z.string().max(60).optional(),
   subtitle: z.string().max(80).optional(),
+  /** Cierre sobre la última foto (ej. "Te esperamos" + dirección). */
+  outroTitle: z.string().max(60).optional(),
+  outroSubtitle: z.string().max(80).optional(),
   photos: z.array(photoSchema).min(1).max(20),
   /** Duración del fundido entre fotos. */
   transitionInSeconds: z.number().min(0.2).max(1.5).default(0.6),
